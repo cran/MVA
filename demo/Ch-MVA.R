@@ -1,5 +1,7 @@
+### R code from vignette source 'Ch-MVA.Rnw'
+
 ###################################################
-### chunk number 1: setup
+### code chunk number 1: setup
 ###################################################
 library("MVA")
 set.seed(280875)
@@ -26,7 +28,7 @@ if (file.exists("deparse.R")) {
 
 
 ###################################################
-### chunk number 2: ch:MVA:tab:hypo
+### code chunk number 2: ch:MVA:tab:hypo
 ###################################################
 hypo <-
   structure(list(individual = 1:10, sex = structure(c(2L, 2L, 2L,
@@ -45,13 +47,13 @@ toLatex(HSAURtable(hypo), pcol = 1,
 
 
 ###################################################
-### chunk number 3: ch:MVA:hypo:subset
+### code chunk number 3: ch:MVA:hypo:subset
 ###################################################
 hypo[1:2, c("health", "weight")]
 
 
 ###################################################
-### chunk number 4: ch:MVA:tab:measure
+### code chunk number 4: ch:MVA:tab:measure
 ###################################################
 measure <-
   structure(list(V1 = 1:20, V2 = c(34L, 37L, 38L, 36L, 38L, 43L,
@@ -72,7 +74,7 @@ toLatex(HSAURtable(measure), pcol = 2,
 
 
 ###################################################
-### chunk number 5: ch:MVA:tab:pottery
+### code chunk number 5: ch:MVA:tab:pottery
 ###################################################
 data("pottery", package = "HSAUR2")
 toLatex(HSAURtable(pottery), pcol = 1,
@@ -81,7 +83,7 @@ toLatex(HSAURtable(pottery), pcol = 1,
 
 
 ###################################################
-### chunk number 6: ch:MVA:tab:exam
+### code chunk number 6: ch:MVA:tab:exam
 ###################################################
 exam <-
   structure(list(subject = 1:5, math = c(60L, 80L, 53L, 85L, 45L
@@ -96,7 +98,7 @@ toLatex(HSAURtable(exam), pcol = 1,
 
 
 ###################################################
-### chunk number 7: ch:MVA:USairpollution:tab
+### code chunk number 7: ch:MVA:USairpollution:tab
 ###################################################
 data("USairpollution", package = "HSAUR2")
 toLatex(HSAURtable(USairpollution), pcol = 1,
@@ -105,13 +107,13 @@ toLatex(HSAURtable(USairpollution), pcol = 1,
 
 
 ###################################################
-### chunk number 8: ch:MVA:measure:cov
+### code chunk number 8: ch:MVA:measure:cov
 ###################################################
 cov(measure[, c("chest", "waist", "hips")])
 
 
 ###################################################
-### chunk number 9: ch:MVA:measure:cov
+### code chunk number 9: ch:MVA:measure:cov
 ###################################################
 cov(subset(measure, gender == "female")[, 
            c("chest", "waist", "hips")])
@@ -120,21 +122,20 @@ cov(subset(measure, gender == "male")[,
 
 
 ###################################################
-### chunk number 10: ch:MVA:hypo:cor
+### code chunk number 10: ch:MVA:hypo:cor
 ###################################################
 cor(measure[, c("chest", "waist", "hips")])
 
 
 ###################################################
-### chunk number 11: ch:MVA:measure:dist eval=FALSE
+### code chunk number 11: ch:MVA:measure:dist (eval = FALSE)
 ###################################################
-## #line 657 "Ch-MVA.Rnw"
 ## dist(scale(measure[, c("chest", "waist", "hips")], 
 ##      center = FALSE))
 
 
 ###################################################
-### chunk number 12: ch:MVA:measure:dist
+### code chunk number 12: ch:MVA:measure:dist
 ###################################################
 x <- dist(scale(measure[, c("chest", "waist", "hips")], 
      center = FALSE))
@@ -143,7 +144,7 @@ cat("...")
 
 
 ###################################################
-### chunk number 13: ch:MVA:fig:dmvnorm
+### code chunk number 13: ch:MVA:fig:dmvnorm
 ###################################################
 library("mvtnorm")
 x <- y <- seq(from = -3, to = 3, length = 50)
@@ -156,7 +157,7 @@ persp(x = x, y = y, z = d, xlab = "x1", ylab = "x2",
 
 
 ###################################################
-### chunk number 14: ch:MVA:fig:cdf
+### code chunk number 14: ch:MVA:fig:cdf
 ###################################################
 x <- seq(from = -3, to = 3, length = 1000)
 Fx <- pnorm(x)
@@ -180,27 +181,27 @@ box()
 
 
 ###################################################
-### chunk number 15: ch:MVA:fig:measure:chisq:setup1
+### code chunk number 15: ch:MVA:fig:measure:chisq:setup1
 ###################################################
 x <- measure[, c("chest", "waist", "hips")]
 
 
 ###################################################
-### chunk number 16: ch:MVA:fig:measure:chisq:setup2
+### code chunk number 16: ch:MVA:fig:measure:chisq:setup2
 ###################################################
 cm <- colMeans(x)
 S <- cov(x)
 
 
 ###################################################
-### chunk number 17: ch:MVA:fig:measure:chisq:setup3
+### code chunk number 17: ch:MVA:fig:measure:chisq:setup3
 ###################################################
 d <- apply(x, MARGIN = 1, function(x) 
            t(x - cm) %*% solve(S) %*% (x - cm))
 
 
 ###################################################
-### chunk number 18: ch:MVA:fig:measure:qq
+### code chunk number 18: ch:MVA:fig:measure:qq
 ###################################################
 qqnorm(measure[,"chest"], main = "chest"); qqline(measure[,"chest"])
 qqnorm(measure[,"waist"], main = "waist"); qqline(measure[,"waist"])
@@ -208,7 +209,7 @@ qqnorm(measure[,"hips"], main = "hips"); qqline(measure[,"hips"])
 
 
 ###################################################
-### chunk number 19: ch:MVA:fig:measure:chisq
+### code chunk number 19: ch:MVA:fig:measure:chisq
 ###################################################
 plot(qchisq((1:nrow(x) - 1/2) / nrow(x), df = 3), sort(d),
      xlab = expression(paste(chi[3]^2, " Quantile")), 
@@ -217,9 +218,8 @@ abline(a = 0, b = 1)
 
 
 ###################################################
-### chunk number 20: ch:MVA:fig:USairpollution:qq:setup eval=FALSE
+### code chunk number 20: ch:MVA:fig:USairpollution:qq:setup (eval = FALSE)
 ###################################################
-## #line 891 "Ch-MVA.Rnw"
 ## layout(matrix(1:8, nc = 2))
 ## sapply(colnames(USairpollution), function(x) {
 ##     qqnorm(USairpollution[[x]], main = x)
@@ -228,7 +228,7 @@ abline(a = 0, b = 1)
 
 
 ###################################################
-### chunk number 21: ch:MVA:fig:USairpollution:qq
+### code chunk number 21: ch:MVA:fig:USairpollution:qq
 ###################################################
 layout(matrix(1:8, nc = 2))
 sapply(colnames(USairpollution), function(x) {
@@ -238,7 +238,7 @@ sapply(colnames(USairpollution), function(x) {
 
 
 ###################################################
-### chunk number 22: ch:MVA:fig:USairpollution:chisq
+### code chunk number 22: ch:MVA:fig:USairpollution:chisq
 ###################################################
 x <- USairpollution
 cm <- colMeans(x)
@@ -254,7 +254,7 @@ abline(a = 0, b = 1)
 
 
 ###################################################
-### chunk number 23: ex
+### code chunk number 23: ex
 ###################################################
 s <- c(3.8778,
        2.8110,  2.1210,
@@ -268,7 +268,7 @@ writeLines(apply(S, 1, function(x) paste(paste(formatC(x, format = "f"), collaps
 
 
 ###################################################
-### chunk number 24: ex
+### code chunk number 24: ex
 ###################################################
 X <- matrix(
  c(3, 4, 4, 6, 1,

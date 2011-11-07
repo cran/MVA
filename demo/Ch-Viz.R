@@ -1,5 +1,7 @@
+### R code from vignette source 'Ch-Viz.Rnw'
+
 ###################################################
-### chunk number 1: setup
+### code chunk number 1: setup
 ###################################################
 library("MVA")
 set.seed(280875)
@@ -26,7 +28,7 @@ if (file.exists("deparse.R")) {
 
 
 ###################################################
-### chunk number 2: ch:Viz:data
+### code chunk number 2: ch:Viz:data
 ###################################################
 measure <- 
 structure(list(V1 = 1:20, V2 = c(34L, 37L, 38L, 36L, 38L, 43L,
@@ -45,29 +47,28 @@ data("USairpollution", package = "HSAUR2")
 
 
 ###################################################
-### chunk number 3: ch:Viz:USairpollution:plot1mlab
+### code chunk number 3: ch:Viz:USairpollution:plot1mlab
 ###################################################
 mlab <- "Manufacturing enterprises with 20 or more workers"
 plab <- "Population size (1970 census) in thousands"
 
 
 ###################################################
-### chunk number 4: ch:Viz:USairpollution:plot1setup eval=FALSE
+### code chunk number 4: ch:Viz:USairpollution:plot1setup (eval = FALSE)
 ###################################################
-## #line 181 "Ch-Viz.Rnw"
 ## plot(popul ~ manu, data = USairpollution, 
 ##      xlab = mlab, ylab = plab)
 
 
 ###################################################
-### chunk number 5: ch:Viz:USairpollution:plot1
+### code chunk number 5: ch:Viz:USairpollution:plot1
 ###################################################
 plot(popul ~ manu, data = USairpollution, 
      xlab = mlab, ylab = plab)
 
 
 ###################################################
-### chunk number 6: ch:Viz:USairpollution:plot3setup
+### code chunk number 6: ch:Viz:USairpollution:plot3setup
 ###################################################
 layout(matrix(c(2, 0, 1, 3), nrow = 2, byrow = TRUE),
        widths = c(2, 1), heights = c(1, 2), respect = TRUE)
@@ -81,7 +82,7 @@ with(USairpollution, boxplot(popul))
 
 
 ###################################################
-### chunk number 7: ch:Viz:USairpollution:plot2
+### code chunk number 7: ch:Viz:USairpollution:plot2
 ###################################################
 plot(popul ~ manu, data = USairpollution, 
      xlab = mlab, ylab = plab)
@@ -90,7 +91,7 @@ rug(USairpollution$popul, side = 2)
 
 
 ###################################################
-### chunk number 8: ch:Viz:USairpollution:plot3
+### code chunk number 8: ch:Viz:USairpollution:plot3
 ###################################################
 layout(matrix(c(2, 0, 1, 3), nrow = 2, byrow = TRUE),
        widths = c(2, 1), heights = c(1, 2), respect = TRUE)
@@ -104,7 +105,7 @@ with(USairpollution, boxplot(popul))
 
 
 ###################################################
-### chunk number 9: ch:Viz:USairpollution:plot4
+### code chunk number 9: ch:Viz:USairpollution:plot4
 ###################################################
 outcity <- match(lab <- c("Chicago", "Detroit", 
     "Cleveland", "Philadelphia"), rownames(USairpollution))
@@ -115,7 +116,7 @@ text(x$manu[outcity], x$popul[outcity], labels = lab,
 
 
 ###################################################
-### chunk number 10: ch:Viz:USairpollution:cor
+### code chunk number 10: ch:Viz:USairpollution:cor
 ###################################################
 with(USairpollution, cor(manu, popul))
 outcity <- match(c("Chicago", "Detroit", 
@@ -125,13 +126,13 @@ with(USairpollution, cor(manu[-outcity], popul[-outcity]))
 
 
 ###################################################
-### chunk number 11: ch:Viz:USairpollution:chull
+### code chunk number 11: ch:Viz:USairpollution:chull
 ###################################################
 (hull <- with(USairpollution, chull(manu, popul)))
 
 
 ###################################################
-### chunk number 12: ch:Viz:USairpollution:chullplot
+### code chunk number 12: ch:Viz:USairpollution:chullplot
 ###################################################
 with(USairpollution, 
      plot(manu, popul, pch = 1, xlab = mlab, ylab = plab))
@@ -140,15 +141,14 @@ with(USairpollution,
 
 
 ###################################################
-### chunk number 13: ch:Viz:USairpollution:chullcor
+### code chunk number 13: ch:Viz:USairpollution:chullcor
 ###################################################
 with(USairpollution, cor(manu[-hull],popul[-hull]))
 
 
 ###################################################
-### chunk number 14: ch:Viz:USairpollution:chiplot:setup eval=FALSE
+### code chunk number 14: ch:Viz:USairpollution:chiplot:setup (eval = FALSE)
 ###################################################
-## #line 424 "Ch-Viz.Rnw"
 ## with(USairpollution, plot(manu, popul, 
 ##                           xlab = mlab, ylab = plab, 
 ##                           cex.lab = 0.9))
@@ -156,8 +156,9 @@ with(USairpollution, cor(manu[-hull],popul[-hull]))
 
 
 ###################################################
-### chunk number 15: ch:Viz:USairpollution:chiplot
+### code chunk number 15: ch:Viz:USairpollution:chiplot
 ###################################################
+par(mai = par("mai") * c(1, 1, 1, 1.5))
 with(USairpollution, plot(manu, popul, 
                           xlab = mlab, ylab = plab, 
                           cex.lab = 0.9))
@@ -165,7 +166,7 @@ with(USairpollution, chiplot(manu, popul))
 
 
 ###################################################
-### chunk number 16: ch:Viz:USairpollution:plot5
+### code chunk number 16: ch:Viz:USairpollution:plot5
 ###################################################
 ylim <- with(USairpollution, range(wind)) * c(0.95, 1)
 plot(wind ~ temp, data = USairpollution, 
@@ -177,7 +178,7 @@ with(USairpollution, symbols(temp, wind, circles = SO2,
 
 
 ###################################################
-### chunk number 17: ch:Viz:USairpollution:plot6
+### code chunk number 17: ch:Viz:USairpollution:plot6
 ###################################################
 plot(wind ~ temp, data = USairpollution,
      xlab = "Average annual temperature (Fahrenheit)",
@@ -189,19 +190,19 @@ with(USairpollution,
 
 
 ###################################################
-### chunk number 18: ch:Viz:USairpollution:plot7
+### code chunk number 18: ch:Viz:USairpollution:plot7
 ###################################################
 stars(USairpollution, cex = 0.55)
 
 
 ###################################################
-### chunk number 19: ch:Viz:USairpollution:plot8
+### code chunk number 19: ch:Viz:USairpollution:plot8
 ###################################################
 pairs(USairpollution, pch = ".", cex = 1.5)
 
 
 ###################################################
-### chunk number 20: ch:Viz:USairpollution:plot9
+### code chunk number 20: ch:Viz:USairpollution:plot9
 ###################################################
 pairs(USairpollution, 
       panel = function (x, y, ...) {
@@ -211,13 +212,13 @@ pairs(USairpollution,
 
 
 ###################################################
-### chunk number 21: ch:Viz:USairpollution:cor
+### code chunk number 21: ch:Viz:USairpollution:cor
 ###################################################
 round(cor(USairpollution), 4) 
 
 
 ###################################################
-### chunk number 22: ch:Viz-kernel-figs
+### code chunk number 22: ch:Viz-kernel-figs
 ###################################################
 rec <- function(x) (abs(x) < 1) * 0.5
 tri <- function(x) (abs(x) < 1) * (1 - abs(x))
@@ -233,29 +234,28 @@ legend("topleft", legend = c("Rectangular", "Triangular",
 
 
 ###################################################
-### chunk number 23: ch:Viz-x-bumps-data
+### code chunk number 23: ch:Viz-x-bumps-data
 ###################################################
 x <- c(0, 1, 1.1, 1.5, 1.9, 2.8, 2.9, 3.5)
 n <- length(x)
 
 
 ###################################################
-### chunk number 24: ch:Viz-x-bumps-gaussian
+### code chunk number 24: ch:Viz-x-bumps-gaussian
 ###################################################
 xgrid <- seq(from = min(x) - 1, to = max(x) + 1, by = 0.01) 
 
 
 ###################################################
-### chunk number 25: ch:Viz-x-bumps-bumps
+### code chunk number 25: ch:Viz-x-bumps-bumps
 ###################################################
 h <- 0.4
 bumps <- sapply(x, function(a) gauss((xgrid - a)/h)/(n * h))
 
 
 ###################################################
-### chunk number 26: ch:Viz-x-bumps-setup eval=FALSE
+### code chunk number 26: ch:Viz-x-bumps-setup (eval = FALSE)
 ###################################################
-## #line 780 "Ch-Viz.Rnw"
 ## plot(xgrid, rowSums(bumps), ylab = expression(hat(f)(x)),
 ##      type = "l", xlab = "x", lwd = 2)
 ## rug(x, lwd = 2)
@@ -263,8 +263,9 @@ bumps <- sapply(x, function(a) gauss((xgrid - a)/h)/(n * h))
 
 
 ###################################################
-### chunk number 27: ch:Viz-x-bumps
+### code chunk number 27: ch:Viz-x-bumps
 ###################################################
+op <- par(mai = par("mai") * c(1, 1.2, 1, 1))
 plot(xgrid, rowSums(bumps), ylab = expression(hat(f)(x)),
      type = "l", xlab = "x", lwd = 2)
 rug(x, lwd = 2)
@@ -273,7 +274,7 @@ par(op)
 
 
 ###################################################
-### chunk number 28: ch:Viz-epakernel-fig
+### code chunk number 28: ch:Viz-epakernel-fig
 ###################################################
 epa <- function(x, y) 
     ((x^2 + y^2) < 1) * 2/pi * (1 - x^2 - y^2)
@@ -285,7 +286,7 @@ persp(x = x, y = x, z = epavals, xlab = "x", ylab = "y",
 
 
 ###################################################
-### chunk number 29: ch:Viz:CYGOB1:tab
+### code chunk number 29: ch:Viz:CYGOB1:tab
 ###################################################
 toLatex(HSAURtable(CYGOB1), pcol = 3,
     caption = "Energy output and surface temperature of star cluster CYG OB1.",
@@ -293,7 +294,7 @@ toLatex(HSAURtable(CYGOB1), pcol = 3,
 
 
 ###################################################
-### chunk number 30: ch:Viz:CYGOB1:plot1
+### code chunk number 30: ch:Viz:CYGOB1:plot1
 ###################################################
 library("KernSmooth")
 CYGOB1d <- bkde2D(CYGOB1, bandwidth = sapply(CYGOB1, dpik))
@@ -304,7 +305,7 @@ contour(x = CYGOB1d$x1, y = CYGOB1d$x2,
 
 
 ###################################################
-### chunk number 31: ch:Viz:CYGOB1:plot2
+### code chunk number 31: ch:Viz:CYGOB1:plot2
 ###################################################
 persp(x = CYGOB1d$x1, y = CYGOB1d$x2, z = CYGOB1d$fhat,
       xlab = "log surface temperature",
@@ -313,9 +314,8 @@ persp(x = CYGOB1d$x1, y = CYGOB1d$x2, z = CYGOB1d$fhat,
 
 
 ###################################################
-### chunk number 32: ch:Viz:measure:plot1:setup eval=FALSE
+### code chunk number 32: ch:Viz:measure:plot1:setup (eval = FALSE)
 ###################################################
-## #line 920 "Ch-Viz.Rnw"
 ## panel.hist <- function(x, ...)
 ## {
 ##     usr <- par("usr"); on.exit(par(usr))
@@ -337,7 +337,7 @@ persp(x = CYGOB1d$x1, y = CYGOB1d$x2, z = CYGOB1d$fhat,
 
 
 ###################################################
-### chunk number 33: ch:Viz:measure:plot1
+### code chunk number 33: ch:Viz:measure:plot1
 ###################################################
 panel.hist <- function(x, ...)
 {
@@ -360,7 +360,7 @@ pairs(measure[, c("chest", "waist", "hips")],
 
 
 ###################################################
-### chunk number 34: ch:Viz:measure:plot2
+### code chunk number 34: ch:Viz:measure:plot2
 ###################################################
 library("scatterplot3d")
 with(measure, scatterplot3d(chest, waist, hips,
@@ -368,7 +368,7 @@ with(measure, scatterplot3d(chest, waist, hips,
 
 
 ###################################################
-### chunk number 35: ch:Viz:USairpollution:plot10
+### code chunk number 35: ch:Viz:USairpollution:plot10
 ###################################################
 with(USairpollution, 
     scatterplot3d(temp, wind, SO2, type = "h",
@@ -376,13 +376,13 @@ with(USairpollution,
 
 
 ###################################################
-### chunk number 36: ch:Viz:USairpollution:plot11
+### code chunk number 36: ch:Viz:USairpollution:plot11
 ###################################################
 plot(xyplot(SO2 ~ temp| cut(wind, 2), data = USairpollution))
 
 
 ###################################################
-### chunk number 37: ch:Viz:USairpollution:plot12
+### code chunk number 37: ch:Viz:USairpollution:plot12
 ###################################################
 pollution <- with(USairpollution, equal.count(SO2,4))
 plot(cloud(precip ~ temp * wind | pollution, panel.aspect = 0.9,
@@ -390,7 +390,7 @@ plot(cloud(precip ~ temp * wind | pollution, panel.aspect = 0.9,
 
 
 ###################################################
-### chunk number 38: ch:Viz:quakes:plot1
+### code chunk number 38: ch:Viz:quakes:plot1
 ###################################################
 plot(xyplot(lat ~ long| cut(depth, 3), data = quakes, 
             layout = c(3, 1), xlab = "Longitude", 
@@ -398,7 +398,7 @@ plot(xyplot(lat ~ long| cut(depth, 3), data = quakes,
 
 
 ###################################################
-### chunk number 39: ch:Viz:quakes:plot2
+### code chunk number 39: ch:Viz:quakes:plot2
 ###################################################
 Magnitude <- with(quakes, equal.count(mag, 4))
 depth.ord <- with(quakes, rev(order(depth)))
@@ -423,7 +423,7 @@ plot(xyplot(lat ~ long | Magnitude, data = quakes.ordered,
 
 
 ###################################################
-### chunk number 40: ch:Viz:quakes:plot3
+### code chunk number 40: ch:Viz:quakes:plot3
 ###################################################
 plot(cloud(depth ~ lat * long | Magnitude, data = quakes,
       zlim = rev(range(quakes$depth)),
@@ -432,7 +432,7 @@ plot(cloud(depth ~ lat * long | Magnitude, data = quakes,
 
 
 ###################################################
-### chunk number 41: ch:Viz:USairpollution:stalac
+### code chunk number 41: ch:Viz:USairpollution:stalac
 ###################################################
 stalac(USairpollution)
 

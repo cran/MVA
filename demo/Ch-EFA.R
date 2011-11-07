@@ -1,5 +1,7 @@
+### R code from vignette source 'Ch-EFA.Rnw'
+
 ###################################################
-### chunk number 1: setup
+### code chunk number 1: setup
 ###################################################
 library("MVA")
 set.seed(280875)
@@ -26,7 +28,7 @@ if (file.exists("deparse.R")) {
 
 
 ###################################################
-### chunk number 2: ch:EFA:data
+### code chunk number 2: ch:EFA:data
 ###################################################
 d <-
 c(0.447,          
@@ -53,7 +55,7 @@ rownames(druguse) <- colnames(druguse) <- c("cigarettes", "beer", "wine", "liquo
 
 
 ###################################################
-### chunk number 3: ch:EFA:life:tab
+### code chunk number 3: ch:EFA:life:tab
 ###################################################
 "life" <-
 structure(.Data = list(c(63., 34., 38., 59., 56., 62., 50., 65., 56., 69., 65., 64., 56., 60., 61., 49., 59., 63., 59., 65., 65., 64.,
@@ -88,27 +90,27 @@ toLatex(HSAURtable(life), pcol = 1, rownames = TRUE,
 
 
 ###################################################
-### chunk number 4: ch:EFA:life
+### code chunk number 4: ch:EFA:life
 ###################################################
 sapply(1:3, function(f) 
     factanal(life, factors = f, method ="mle")$PVAL)
 
 
 ###################################################
-### chunk number 5: ch:EFA:life3
+### code chunk number 5: ch:EFA:life3
 ###################################################
 factanal(life, factors = 3, method ="mle")
 
 
 ###################################################
-### chunk number 6: ch:EFA:life:scores
+### code chunk number 6: ch:EFA:life:scores
 ###################################################
 (scores <- factanal(life, factors = 3, method = "mle",
                    scores = "regression")$scores)
 
 
 ###################################################
-### chunk number 7: ch:EFA:life:3d
+### code chunk number 7: ch:EFA:life:3d
 ###################################################
 cex <- 0.8
 plot(scores[,1], scores[,2], type = "n", xlab = "Factor 1", ylab = "Factor 2")
@@ -120,7 +122,7 @@ text(scores[,2], scores[,3], abbreviate(rownames(life), 5), cex = cex)
 
 
 ###################################################
-### chunk number 8: ch:EFA:druguse:plot
+### code chunk number 8: ch:EFA:druguse:plot
 ###################################################
 ord <- order.dendrogram(as.dendrogram(hclust(dist(druguse))))  
 panel.corrgram <-    
@@ -149,7 +151,7 @@ print(levelplot(druguse[ord, ord], at = do.breaks(c(-1.01, 1.01), 20),
 
 
 ###################################################
-### chunk number 9: ch:EFA:drugs
+### code chunk number 9: ch:EFA:drugs
 ###################################################
 sapply(1:6, function(nf)
     factanal(covmat = druguse, factors = nf, 
@@ -157,14 +159,14 @@ sapply(1:6, function(nf)
 
 
 ###################################################
-### chunk number 10: ch:EFA:drugs
+### code chunk number 10: ch:EFA:drugs
 ###################################################
 (factanal(covmat = druguse, factors = 6, 
           method = "mle", n.obs = 1634))
 
 
 ###################################################
-### chunk number 11: ch:EFA:drugdiff
+### code chunk number 11: ch:EFA:drugdiff
 ###################################################
 pfun <- function(nf) {
     fa <- factanal(covmat = druguse, factors = nf, 
@@ -179,7 +181,7 @@ pfun(6)
 
 
 ###################################################
-### chunk number 12: ch:opt
+### code chunk number 12: ch:opt
 ###################################################
 op <- options(width = 150, prompt = "              R> ")
 pfun2 <- pfun
@@ -191,14 +193,14 @@ pfun <- function(...) {
 
 
 ###################################################
-### chunk number 13: ch:EFA:drufdiff34
+### code chunk number 13: ch:EFA:drufdiff34
 ###################################################
 pfun(3)
 pfun(4)
 
 
 ###################################################
-### chunk number 14: ch:opt
+### code chunk number 14: ch:opt
 ###################################################
 options(op)
 

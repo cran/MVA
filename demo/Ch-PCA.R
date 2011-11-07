@@ -1,5 +1,7 @@
+### R code from vignette source 'Ch-PCA.Rnw'
+
 ###################################################
-### chunk number 1: setup
+### code chunk number 1: setup
 ###################################################
 library("MVA")
 set.seed(280875)
@@ -26,7 +28,7 @@ if (file.exists("deparse.R")) {
 
 
 ###################################################
-### chunk number 2: ch:PCA:data
+### code chunk number 2: ch:PCA:data
 ###################################################
 bc <- c(
  0.290,           
@@ -46,19 +48,19 @@ blood_cov <- blood_corr * outer(blood_sd, blood_sd, "*")
 
 
 ###################################################
-### chunk number 3: ch:PCA:blood_corr
+### code chunk number 3: ch:PCA:blood_corr
 ###################################################
 blood_corr
 
 
 ###################################################
-### chunk number 4: ch:PCA:blood_sd
+### code chunk number 4: ch:PCA:blood_sd
 ###################################################
 blood_sd
 
 
 ###################################################
-### chunk number 5: ch:PCA:blood:PCA
+### code chunk number 5: ch:PCA:blood:PCA
 ###################################################
 blood_pcacov <- princomp(covmat = blood_cov)
 summary(blood_pcacov, loadings = TRUE)
@@ -67,7 +69,7 @@ summary(blood_pcacor, loadings = TRUE)
 
 
 ###################################################
-### chunk number 6: ch:PCA:blood:plot1
+### code chunk number 6: ch:PCA:blood:plot1
 ###################################################
 plot(blood_pcacor$sdev^2, xlab = "Component number",
      ylab = "Component variance", type = "l", main = "Scree diagram")
@@ -77,7 +79,7 @@ plot(log(blood_pcacor$sdev^2), xlab = "Component number",
 
 
 ###################################################
-### chunk number 7: ch:PCA:headsize:tab
+### code chunk number 7: ch:PCA:headsize:tab
 ###################################################
 "headsize" <-
 matrix(c(191, 195, 181, 183, 176, 208, 189, 197, 188, 192, 179, 183, 174, 190, 188, 163, 195, 186, 181, 175, 192, 174,
@@ -97,7 +99,7 @@ headsize <- x
 
 
 ###################################################
-### chunk number 8: ch:PCA:head
+### code chunk number 8: ch:PCA:head
 ###################################################
 head_dat <- headsize[, c("head1", "head2")]
 colMeans(head_dat)
@@ -105,7 +107,7 @@ cov(head_dat)
 
 
 ###################################################
-### chunk number 9: ch:PCA:head:PCA
+### code chunk number 9: ch:PCA:head:PCA
 ###################################################
 head_pca <- princomp(x = head_dat)
 head_pca
@@ -113,7 +115,7 @@ print(summary(head_pca), loadings = TRUE)
 
 
 ###################################################
-### chunk number 10: ch:PCA:head:plot1
+### code chunk number 10: ch:PCA:head:plot1
 ###################################################
 a1<-183.84-0.721*185.72/0.693
 b1<-0.721/0.693
@@ -126,14 +128,14 @@ abline(a2, b2, lty = 2)
 
 
 ###################################################
-### chunk number 11: ch:PCA:head:plot2
+### code chunk number 11: ch:PCA:head:plot2
 ###################################################
 xlim <- range(head_pca$scores[,1])
 plot(head_pca$scores, xlim = xlim, ylim = xlim)
 
 
 ###################################################
-### chunk number 12: ch:PCA:heptathlon:tab
+### code chunk number 12: ch:PCA:heptathlon:tab
 ###################################################
 data("heptathlon",package="HSAUR2")
 toLatex(HSAURtable(heptathlon), pcol = 1,
@@ -143,7 +145,7 @@ toLatex(HSAURtable(heptathlon), pcol = 1,
 
 
 ###################################################
-### chunk number 13: ch:PCA:heptathlon:recode
+### code chunk number 13: ch:PCA:heptathlon:recode
 ###################################################
 heptathlon$hurdles <- with(heptathlon, max(hurdles)-hurdles)
 heptathlon$run200m <- with(heptathlon, max(run200m)-run200m)
@@ -154,13 +156,13 @@ plot(heptathlon[,-score])
 
 
 ###################################################
-### chunk number 14: ch:PCA:heptathlon:scatter
+### code chunk number 14: ch:PCA:heptathlon:scatter
 ###################################################
 plot(heptathlon[,-score], pch = ".", cex = 1.5)
 
 
 ###################################################
-### chunk number 15: ch:PCA:heptathlon:PNG
+### code chunk number 15: ch:PCA:heptathlon:PNG
 ###################################################
 heptathlon <- heptathlon[-grep("PNG", rownames(heptathlon)),]
 score <- which(colnames(heptathlon) == "score")
@@ -168,46 +170,46 @@ round(cor(heptathlon[,-score]), 2)
 
 
 ###################################################
-### chunk number 16: ch:PCA:heptathlon:scatter2
+### code chunk number 16: ch:PCA:heptathlon:scatter2
 ###################################################
 plot(heptathlon[,-score], pch = ".", cex = 1.5)
 
 
 ###################################################
-### chunk number 17: PCA-opt
+### code chunk number 17: PCA-opt
 ###################################################
 op <- options(digits = 2)
 
 
 ###################################################
-### chunk number 18: PCA-heptathlon-pca
+### code chunk number 18: PCA-heptathlon-pca
 ###################################################
 heptathlon_pca <- prcomp(heptathlon[, -score], scale = TRUE)
 print(heptathlon_pca)
 
 
 ###################################################
-### chunk number 19: PCA-heptathlon-summary
+### code chunk number 19: PCA-heptathlon-summary
 ###################################################
 summary(heptathlon_pca)
 
 
 ###################################################
-### chunk number 20: PCA-heptathlon-a1
+### code chunk number 20: PCA-heptathlon-a1
 ###################################################
 a1 <- heptathlon_pca$rotation[,1]
 a1
 
 
 ###################################################
-### chunk number 21: PCA-heptathlon-scaling
+### code chunk number 21: PCA-heptathlon-scaling
 ###################################################
 center <- heptathlon_pca$center
 scale <- heptathlon_pca$scale
 
 
 ###################################################
-### chunk number 22: PCA-heptathlon-s1
+### code chunk number 22: PCA-heptathlon-s1
 ###################################################
 hm <- as.matrix(heptathlon[,-score])
 drop(scale(hm, center = center, scale = scale) %*% 
@@ -215,45 +217,44 @@ drop(scale(hm, center = center, scale = scale) %*%
 
 
 ###################################################
-### chunk number 23: PCA-heptathlon-s1
+### code chunk number 23: PCA-heptathlon-s1
 ###################################################
 predict(heptathlon_pca)[,1]
 
 
 ###################################################
-### chunk number 24: PCA-heptathlon-sdev
+### code chunk number 24: PCA-heptathlon-sdev
 ###################################################
 sdev <- heptathlon_pca$sdev
 prop12 <- round(sum(sdev[1:2]^2)/sum(sdev^2)*100, 0)
 
 
 ###################################################
-### chunk number 25: PCA-heptathlon-pca-plot eval=FALSE
+### code chunk number 25: PCA-heptathlon-pca-plot (eval = FALSE)
 ###################################################
-## #line 1077 "Ch-PCA.Rnw"
 ## plot(heptathlon_pca)
 
 
 ###################################################
-### chunk number 26: PCA-heptathlon-pca-plot
+### code chunk number 26: PCA-heptathlon-pca-plot
 ###################################################
 plot(heptathlon_pca, main = "")
 
 
 ###################################################
-### chunk number 27: PCA-scorecor
+### code chunk number 27: PCA-scorecor
 ###################################################
 cor(heptathlon$score, heptathlon_pca$x[,1])
 
 
 ###################################################
-### chunk number 28: PCA-heptathlonscore
+### code chunk number 28: PCA-heptathlonscore
 ###################################################
 plot(heptathlon$score, heptathlon_pca$x[,1])
 
 
 ###################################################
-### chunk number 29: ch:PCA:USairpollution:scatter
+### code chunk number 29: ch:PCA:USairpollution:scatter
 ###################################################
 data("USairpollution", package = "HSAUR2")
 panel.hist <- function(x, ...) {
@@ -271,20 +272,20 @@ pairs(USairpollution[,-1], diag.panel = panel.hist,
 
 
 ###################################################
-### chunk number 30: ch:PCA:USairpollution:pca
+### code chunk number 30: ch:PCA:USairpollution:pca
 ###################################################
 cor(USairpollution[,-1])
 usair_pca <- princomp(USairpollution[,-1], cor = TRUE)
 
 
 ###################################################
-### chunk number 31: ch:PCA:USairpollution:pcasummary
+### code chunk number 31: ch:PCA:USairpollution:pcasummary
 ###################################################
 summary(usair_pca, loadings = TRUE)
 
 
 ###################################################
-### chunk number 32: ch:PCA:USairpollution:pcaplot
+### code chunk number 32: ch:PCA:USairpollution:pcaplot
 ###################################################
 pairs(usair_pca$scores[,1:3], ylim = c(-6, 4), xlim = c(-6, 4),
       panel = function(x,y, ...) {
@@ -295,7 +296,7 @@ pairs(usair_pca$scores[,1:3], ylim = c(-6, 4), xlim = c(-6, 4),
 
 
 ###################################################
-### chunk number 33: ch:PCA:USairpollution:lmplot
+### code chunk number 33: ch:PCA:USairpollution:lmplot
 ###################################################
 out <- sapply(1:6, function(i) {
     plot(USairpollution$SO2,usair_pca$scores[,i],
@@ -305,7 +306,7 @@ out <- sapply(1:6, function(i) {
 
 
 ###################################################
-### chunk number 34: ch:PCA:USairpollution:lm
+### code chunk number 34: ch:PCA:USairpollution:lm
 ###################################################
 usair_reg <- lm(SO2 ~ usair_pca$scores, 
                 data = USairpollution)
@@ -313,14 +314,13 @@ summary(usair_reg)
 
 
 ###################################################
-### chunk number 35: PCA-heptathlon-biplot eval=FALSE
+### code chunk number 35: PCA-heptathlon-biplot (eval = FALSE)
 ###################################################
-## #line 1410 "Ch-PCA.Rnw"
 ## biplot(heptathlon_pca, col = c("gray", "black"))
 
 
 ###################################################
-### chunk number 36: PCA-heptathlon-biplot
+### code chunk number 36: PCA-heptathlon-biplot
 ###################################################
 tmp <- heptathlon[, -score]
 rownames(tmp) <- abbreviate(gsub(" \\(.*", "", rownames(tmp)))
@@ -329,7 +329,7 @@ c(-0.5, 0.7), cex = 0.7)
 
 
 ###################################################
-### chunk number 37: ch:PCA:headsize
+### code chunk number 37: ch:PCA:headsize
 ###################################################
 headsize.std <- sweep(headsize, 2, 
                       apply(headsize, 2, sd), FUN = "/")
@@ -345,7 +345,7 @@ r21 <- R[-(1:2), 1:2]
 
 
 ###################################################
-### chunk number 38: ch:PCA:dummy
+### code chunk number 38: ch:PCA:dummy
 ###################################################
 p <- function(x) formatC(x, format = "f", digits = 2)
 f <- function(x, add = 0) paste(ifelse(x < 0, "-", "+"), p(abs(x)), "x_", 1:length(x) + add, 
@@ -355,7 +355,7 @@ ff <- function(x, xname) paste(ifelse(x < 0, "-", "+"), p(abs(x)), "\\\\text{", 
 
 
 ###################################################
-### chunk number 39: ch:PCA:headsize-cor
+### code chunk number 39: ch:PCA:headsize-cor
 ###################################################
 girth1 <- headsize.std[,1:2] %*% e1$vectors[,1]
 girth2 <- headsize.std[,3:4] %*% e2$vectors[,1]
@@ -366,14 +366,14 @@ shape2 <- headsize.std[,3:4] %*% e2$vectors[,2]
 
 
 ###################################################
-### chunk number 40: ch:PCA:headsize:plot
+### code chunk number 40: ch:PCA:headsize:plot
 ###################################################
 plot(girth1, girth2)
 plot(shape1, shape2)
 
 
 ###################################################
-### chunk number 41: ch:PCA:LAdepr:tab
+### code chunk number 41: ch:PCA:LAdepr:tab
 ###################################################
 depr <- c(
  0.212,
@@ -394,7 +394,7 @@ LAdepr <- x
 
 
 ###################################################
-### chunk number 42: ch:PCA:LAdepr:CCA
+### code chunk number 42: ch:PCA:LAdepr:CCA
 ###################################################
 r11 <- LAdepr[1:2, 1:2]
 r22 <- LAdepr[-(1:2), -(1:2)]

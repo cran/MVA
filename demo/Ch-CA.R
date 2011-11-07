@@ -1,5 +1,7 @@
+### R code from vignette source 'Ch-CA.Rnw'
+
 ###################################################
-### chunk number 1: setup
+### code chunk number 1: setup
 ###################################################
 library("MVA")
 set.seed(280875)
@@ -26,7 +28,7 @@ if (file.exists("deparse.R")) {
 
 
 ###################################################
-### chunk number 2: ch:CA:data
+### code chunk number 2: ch:CA:data
 ###################################################
 measure <-
 structure(list(V1 = 1:20, V2 = c(34L, 37L, 38L, 36L, 38L, 43L, 
@@ -43,7 +45,7 @@ levels(measure$gender) <- c("male", "female")
 
 
 ###################################################
-### chunk number 3: ch:CA-scplot
+### code chunk number 3: ch:CA-scplot
 ###################################################
 library("mvtnorm")
 dat <- rbind(rmvnorm(25, mean = c(3,3)),
@@ -53,7 +55,7 @@ plot(abs(dat), xlab = expression(x[1]), ylab = expression(x[2]))
 
 
 ###################################################
-### chunk number 4: ch:CA-dist
+### code chunk number 4: ch:CA-dist
 ###################################################
 set.seed(29)
 x1 <- c(0.7, 0.8, 0.85, 0.9, 1.1, 1, 0.95)
@@ -81,21 +83,20 @@ for (i in 1:7) {
 
 
 ###################################################
-### chunk number 5: ch:CA:measure eval=FALSE
+### code chunk number 5: ch:CA:measure (eval = FALSE)
 ###################################################
-## #line 350 "Ch-CA.Rnw"
 ## (dm <- dist(measure[, c("chest", "waist", "hips")]))
 
 
 ###################################################
-### chunk number 6: ch:CA:measure
+### code chunk number 6: ch:CA:measure
 ###################################################
 dm <- dist(measure[, c("chest", "waist", "hips")])
 round(dm, 2)
 
 
 ###################################################
-### chunk number 7: ch:CA:measure:plot
+### code chunk number 7: ch:CA:measure:plot
 ###################################################
 plot(cs <- hclust(dm, method = "single"))
 plot(cc <- hclust(dm, method = "complete"))
@@ -103,7 +104,7 @@ plot(ca <- hclust(dm, method = "average"))
 
 
 ###################################################
-### chunk number 8: ch:CA:measure:plotplot
+### code chunk number 8: ch:CA:measure:plotplot
 ###################################################
 body_pc <- princomp(dm, cor = TRUE)
 layout(matrix(1:6, nr = 2), height = c(2, 1))
@@ -129,9 +130,8 @@ text(body_pc$scores[,1:2], labels = lab, cex=0.6)
 
 
 ###################################################
-### chunk number 9: ch:CA:measure:pca eval=FALSE
+### code chunk number 9: ch:CA:measure:pca (eval = FALSE)
 ###################################################
-## #line 423 "Ch-CA.Rnw"
 ## body_pc <- princomp(dm, cor = TRUE)
 ## xlim <- range(body_pc$scores[,1])
 ## plot(body_pc$scores[,1:2], type = "n", 
@@ -141,7 +141,7 @@ text(body_pc$scores[,1:2], labels = lab, cex=0.6)
 
 
 ###################################################
-### chunk number 10: ch:CA:jet:tab
+### code chunk number 10: ch:CA:jet:tab
 ###################################################
 jet <-
 structure(list(V1 = c(82L, 89L, 101L, 107L, 115L, 122L, 127L,
@@ -172,7 +172,7 @@ toLatex(HSAURtable(jet), pcol = 1,
 
 
 ###################################################
-### chunk number 11: ch:CA:jet:hclust
+### code chunk number 11: ch:CA:jet:hclust
 ###################################################
 X <- scale(jet[, c("SPR", "RGF", "PLF", "SLF")],
            center = FALSE, scale = TRUE) 
@@ -182,7 +182,7 @@ cc
 
 
 ###################################################
-### chunk number 12: ch:CA:jet:hclust:plot
+### code chunk number 12: ch:CA:jet:hclust:plot
 ###################################################
 X <- scale(jet[, c("SPR", "RGF", "PLF", "SLF")],
            center = FALSE, scale = TRUE) 
@@ -192,7 +192,7 @@ cc
 
 
 ###################################################
-### chunk number 13: ch:CA:jet:PCA
+### code chunk number 13: ch:CA:jet:PCA
 ###################################################
 pr <- prcomp(dj)$x[, 1:2]
 plot(pr, pch = (1:2)[cutree(cc, k = 2)],
@@ -205,7 +205,7 @@ legend("topright", col = c("black", "black",
 
 
 ###################################################
-### chunk number 14: ch:CA:crime:tab
+### code chunk number 14: ch:CA:crime:tab
 ###################################################
 `crime` <-
 structure(c(2, 2.2, 2, 3.6, 3.5, 4.6, 10.7, 5.2, 5.5, 5.5, 6,
@@ -253,31 +253,31 @@ toLatex(HSAURtable(crime), pcol = 1, rownames = TRUE,
 
 
 ###################################################
-### chunk number 15: ch:CA:crime:plot
+### code chunk number 15: ch:CA:crime:plot
 ###################################################
 plot(crime, pch = ".", cex = 1.5)
 
 
 ###################################################
-### chunk number 16: ch:CA:crime:outlier
+### code chunk number 16: ch:CA:crime:outlier
 ###################################################
 subset(crime, Murder > 15)
 
 
 ###################################################
-### chunk number 17: ch:CA:crime:plot2
+### code chunk number 17: ch:CA:crime:plot2
 ###################################################
 plot(crime, pch = c(".", "+")[(rownames(crime) == "DC") + 1], cex = 1.5)
 
 
 ###################################################
-### chunk number 18: ch:CA:crime:var
+### code chunk number 18: ch:CA:crime:var
 ###################################################
 sapply(crime, var)
 
 
 ###################################################
-### chunk number 19: ch:CA:crime:stand
+### code chunk number 19: ch:CA:crime:stand
 ###################################################
 rge <- sapply(crime, function(x) diff(range(x)))
 crime_s <- sweep(crime, 2, rge, FUN = "/")
@@ -285,7 +285,7 @@ sapply(crime_s, var)
 
 
 ###################################################
-### chunk number 20: ch:CA:crime:wss
+### code chunk number 20: ch:CA:crime:wss
 ###################################################
 n <- nrow(crime_s)
 wss <- rep(0, 6)
@@ -298,13 +298,13 @@ plot(1:6, wss, type = "b", xlab = "Number of groups",
 
 
 ###################################################
-### chunk number 21: ch:CA:crimes:k2
+### code chunk number 21: ch:CA:crimes:k2
 ###################################################
 kmeans(crime_s, centers = 2)$centers * rge
 
 
 ###################################################
-### chunk number 22: ch:CA:crime:PCA
+### code chunk number 22: ch:CA:crime:PCA
 ###################################################
 crime_pca <- prcomp(crime_s)
 plot(crime_pca$x[, 1:2], 
@@ -312,7 +312,7 @@ plot(crime_pca$x[, 1:2],
 
 
 ###################################################
-### chunk number 23: ca:CA:pottery:dist
+### code chunk number 23: ca:CA:pottery:dist
 ###################################################
 pottery_dist <- dist(pots <- scale(pottery[, colnames(pottery) != "kiln"], 
                                    center = FALSE))
@@ -322,7 +322,7 @@ levelplot(as.matrix(pottery_dist), xlab = "Pot Number",
 
 
 ###################################################
-### chunk number 24: ch:CA:pottery:distplot
+### code chunk number 24: ch:CA:pottery:distplot
 ###################################################
 trellis.par.set(standard.theme(color = FALSE))
 plot(levelplot(as.matrix(pottery_dist), xlab = "Pot Number", ylab = "Pot Number",
@@ -330,7 +330,7 @@ plot(levelplot(as.matrix(pottery_dist), xlab = "Pot Number", ylab = "Pot Number"
 
 
 ###################################################
-### chunk number 25: ch:CA:pottery:wss
+### code chunk number 25: ch:CA:pottery:wss
 ###################################################
 n <- nrow(pots)
 wss <- rep(0, 6)
@@ -343,7 +343,7 @@ plot(1:6, wss, type = "b", xlab = "Number of groups",
 
 
 ###################################################
-### chunk number 26: ch:CA:pots:PCA
+### code chunk number 26: ch:CA:pots:PCA
 ###################################################
 pots_pca <- prcomp(pots)
 plot(pots_pca$x[, 1:2], 
@@ -351,7 +351,7 @@ plot(pots_pca$x[, 1:2],
 
 
 ###################################################
-### chunk number 27: ch:CA:pottery:cluster
+### code chunk number 27: ch:CA:pottery:cluster
 ###################################################
 set.seed(29)
 pottery_cluster <- kmeans(pots, centers = 3)$cluster
@@ -359,7 +359,7 @@ xtabs(~ pottery_cluster + kiln, data = pottery)
 
 
 ###################################################
-### chunk number 28: ch:CA:thompson
+### code chunk number 28: ch:CA:thompson
 ###################################################
 cnt <- c("Iceland", "Norway", "Sweden", "Finland", "Denmark", "UK", "Eire",
          "Germany", "Netherlands", "Belgium", "Switzerland", "France", "Spain",
@@ -419,20 +419,20 @@ mtext(text = paste("Question", 1:6), 3, at = 22 * (0:5), adj = 0)
 
 
 ###################################################
-### chunk number 29: ch:CA:thompsonMC
+### code chunk number 29: ch:CA:thompsonMC
 ###################################################
 library("mclust")
 (mc <- Mclust(thomsonprop))
 
 
 ###################################################
-### chunk number 30: ch:CA:thompsonMC:plot
+### code chunk number 30: ch:CA:thompsonMC:plot
 ###################################################
 plot(mc, thomsonprop, what = "BIC", col = "black")
 
 
 ###################################################
-### chunk number 31: ch:CA:thompsonMC
+### code chunk number 31: ch:CA:thompsonMC
 ###################################################
 cl <- mc$classification
 nm <- unlist(sapply(1:3, function(i) names(cl[cl == i])))
@@ -457,7 +457,7 @@ text(-c(0.75, 0.75, 0.75), -cumsum(table(cl)) + table(cl)/2,
 
 
 ###################################################
-### chunk number 32: ch:CA:neighbor
+### code chunk number 32: ch:CA:neighbor
 ###################################################
 library("flexclust")
 library("mvtnorm")
@@ -473,7 +473,7 @@ plot(k, hull = FALSE, col = rep("black", 5), xlab = "x", ylab = "y")
 
 
 ###################################################
-### chunk number 33: ch:CA:pottery:neighbor
+### code chunk number 33: ch:CA:pottery:neighbor
 ###################################################
 k <- cclust(pots, k = 3, save.data = TRUE)
 plot(k, project = prcomp(pots), hull = FALSE, col = rep("black", 3),
@@ -481,7 +481,7 @@ plot(k, project = prcomp(pots), hull = FALSE, col = rep("black", 3),
 
 
 ###################################################
-### chunk number 34: ch:CA:art:stripes1
+### code chunk number 34: ch:CA:art:stripes1
 ###################################################
 set.seed(912345654)
 x <- rbind(matrix(rnorm(100, sd = 0.5), ncol= 2 ),
@@ -494,7 +494,7 @@ stripes(c5, type = "second", col = 1)
 
 
 ###################################################
-### chunk number 35: ch:CA:art:stripes2
+### code chunk number 35: ch:CA:art:stripes2
 ###################################################
 set.seed(912345654)
 x <- rbind(matrix(rnorm(100, sd = 2.5), ncol = 2),
@@ -507,7 +507,7 @@ stripes(c5, type = "second", col = 1)
 
 
 ###################################################
-### chunk number 36: ch:CA:pottery:stripes
+### code chunk number 36: ch:CA:pottery:stripes
 ###################################################
 set.seed(15)
 c5 <- cclust(pots, k = 3, save.data = TRUE)

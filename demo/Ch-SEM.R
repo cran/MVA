@@ -1,5 +1,7 @@
+### R code from vignette source 'Ch-SEM.Rnw'
+
 ###################################################
-### chunk number 1: setup
+### code chunk number 1: setup
 ###################################################
 library("MVA")
 set.seed(280875)
@@ -26,7 +28,7 @@ if (file.exists("deparse.R")) {
 
 
 ###################################################
-### chunk number 2: setup
+### code chunk number 2: setup
 ###################################################
 library("sem")
 ab <- c(0.73,
@@ -76,7 +78,7 @@ rownames(druguse) <- colnames(druguse) <- c("cigarettes", "beer", "wine", "liquo
 
 
 ###################################################
-### chunk number 3: ch:SEM:ability:plot
+### code chunk number 3: ch:SEM:ability:plot
 ###################################################
 ord <- order.dendrogram(as.dendrogram(hclust(dist(ability))))
 panel.corrgram <-    
@@ -105,7 +107,7 @@ print(levelplot(ability[ord, ord], at = do.breaks(c(-1.01, 1.01), 20),
 
 
 ###################################################
-### chunk number 4: ch:SEM:ability-model
+### code chunk number 4: ch:SEM:ability-model
 ###################################################
 mod <- c("Ability     -> SCA, lambda1, NA",
          "Ability     -> PPE, lambda2, NA",
@@ -126,40 +128,40 @@ writeLines(mod, con = "ability_model.txt")
 
 
 ###################################################
-### chunk number 5: ch:SEM:ability-sem
+### code chunk number 5: ch:SEM:ability-sem
 ###################################################
 ability_model <- specify.model(file = "ability_model.txt")
 ability_sem <- sem(ability_model, ability, 556)
 
 
 ###################################################
-### chunk number 6: ch:SEM:ability-sem
+### code chunk number 6: ch:SEM:ability-sem
 ###################################################
 writeLines(readLines("ability_model.txt"))
 r <- file.remove("ability_model.txt")
 
 
 ###################################################
-### chunk number 7: ch:SEM:ability-summary
+### code chunk number 7: ch:SEM:ability-summary
 ###################################################
 summary(ability_sem)
 
 
 ###################################################
-### chunk number 8: ch:SEM:ability-summary
+### code chunk number 8: ch:SEM:ability-summary
 ###################################################
 su <- summary(ability_sem)
 
 
 ###################################################
-### chunk number 9: ch:SEM:ability-path
+### code chunk number 9: ch:SEM:ability-path
 ###################################################
 path.diagram(ability_sem, file = "ability_sem", 
              ignore.double = FALSE, edge.labels = "both")
 
 
 ###################################################
-### chunk number 10: ch:SEM:ability-files
+### code chunk number 10: ch:SEM:ability-files
 ###################################################
 file.remove("ability_sem.dot")
 file.copy("ability_sem.pdf", "figs", overwrite = TRUE)
@@ -167,7 +169,7 @@ file.remove("ability_sem.pdf")
 
 
 ###################################################
-### chunk number 11: ch:SEM:druguse-model
+### code chunk number 11: ch:SEM:druguse-model
 ###################################################
 mod <- c("Alcohol   -> Cigs, lambda1, NA",
          "Alcohol   -> Beer, lambda3, NA",
@@ -209,7 +211,7 @@ writeLines(mod, con = "druguse_model.txt")
 
 
 ###################################################
-### chunk number 12: ch:SEM:druguse-names
+### code chunk number 12: ch:SEM:druguse-names
 ###################################################
 rownames(druguse) <- colnames(druguse) <- c("Cigs", 
     "Beer", "Wine", "Liqr", "Cocn", "Tran", "Drug", 
@@ -217,28 +219,28 @@ rownames(druguse) <- colnames(druguse) <- c("Cigs",
 
 
 ###################################################
-### chunk number 13: ch:SEM:druguse-sem
+### code chunk number 13: ch:SEM:druguse-sem
 ###################################################
 druguse_model <- specify.model(file = "druguse_model.txt")
 druguse_sem <- sem(druguse_model, druguse, 1634)
 
 
 ###################################################
-### chunk number 14: ch:SEM:druguse-sem
+### code chunk number 14: ch:SEM:druguse-sem
 ###################################################
 writeLines(readLines("druguse_model.txt"))
 r <- file.remove("druguse_model.txt")
 
 
 ###################################################
-### chunk number 15: ch:SEM:druguse-path
+### code chunk number 15: ch:SEM:druguse-path
 ###################################################
 path.diagram(druguse_sem, file = "druguse_sem", 
              ignore.double = FALSE, edge.labels = "both") 
 
 
 ###################################################
-### chunk number 16: ch:SEM:druguse-files
+### code chunk number 16: ch:SEM:druguse-files
 ###################################################
 file.remove("druguse_sem.dot")
 file.copy("druguse_sem.pdf", "figs", overwrite = TRUE)
@@ -246,25 +248,25 @@ file.remove("druguse_sem.pdf")
 
 
 ###################################################
-### chunk number 17: ch:SEM:druguse-summary
+### code chunk number 17: ch:SEM:druguse-summary
 ###################################################
 summary(druguse_sem)
 
 
 ###################################################
-### chunk number 18: ch:SEM:druguse-summary
+### code chunk number 18: ch:SEM:druguse-summary
 ###################################################
 su <- summary(druguse_sem)
 
 
 ###################################################
-### chunk number 19: ch:SEM:druguse-cov
+### code chunk number 19: ch:SEM:druguse-cov
 ###################################################
 round(druguse_sem$S - druguse_sem$C, 3)
 
 
 ###################################################
-### chunk number 20: ch:SEM:alienation:plot
+### code chunk number 20: ch:SEM:alienation:plot
 ###################################################
 a <- cov2cor(alienation)
 ord <- order.dendrogram(as.dendrogram(hclust(dist(a))))
@@ -294,7 +296,7 @@ print(levelplot(a[ord, ord], at = do.breaks(c(-1.01, 1.01), 20),
 
 
 ###################################################
-### chunk number 21: ch:SEM:alienation-model
+### code chunk number 21: ch:SEM:alienation-model
 ###################################################
 mod <- c("SES           -> Educ, NA, 1",
     "SES           -> SEI, lambda1, NA",
@@ -320,7 +322,7 @@ writeLines(mod2, con = "alienation_model2.txt")
 
 
 ###################################################
-### chunk number 22: ch:SEM:alienation-sem
+### code chunk number 22: ch:SEM:alienation-sem
 ###################################################
 alienation_model <- specify.model(
     file = "alienation_model.txt")
@@ -328,21 +330,21 @@ alienation_sem <- sem(alienation_model, alienation, 932)
 
 
 ###################################################
-### chunk number 23: ch:SEM:alienation-sem
+### code chunk number 23: ch:SEM:alienation-sem
 ###################################################
 writeLines(readLines("alienation_model.txt"))
 r <- file.remove("alienation_model.txt")
 
 
 ###################################################
-### chunk number 24: ch:SEM:alienation-path
+### code chunk number 24: ch:SEM:alienation-path
 ###################################################
 path.diagram(alienation_sem, file = "alienation_sem", 
              ignore.double = FALSE, edge.labels = "both")
 
 
 ###################################################
-### chunk number 25: ch:SEM:alienation-files
+### code chunk number 25: ch:SEM:alienation-files
 ###################################################
 file.remove("alienation_sem.dot")
 file.copy("alienation_sem.pdf", "figs", overwrite = TRUE)
@@ -350,19 +352,19 @@ file.remove("alienation_sem.pdf")
 
 
 ###################################################
-### chunk number 26: ch:SEM:alienation-summary
+### code chunk number 26: ch:SEM:alienation-summary
 ###################################################
 summary(alienation_sem)
 
 
 ###################################################
-### chunk number 27: ch:SEM:alienation-summary
+### code chunk number 27: ch:SEM:alienation-summary
 ###################################################
 su <- summary(alienation_sem)
 
 
 ###################################################
-### chunk number 28: ch:SEM:alienation-sem2
+### code chunk number 28: ch:SEM:alienation-sem2
 ###################################################
 alienation_model2 <- specify.model(file = "alienation_model2.txt")
 alienation_sem2 <- sem(alienation_model2, alienation, 932)

@@ -1,5 +1,7 @@
+### R code from vignette source 'Ch-MDS.Rnw'
+
 ###################################################
-### chunk number 1: setup
+### code chunk number 1: setup
 ###################################################
 library("MVA")
 set.seed(280875)
@@ -26,7 +28,7 @@ if (file.exists("deparse.R")) {
 
 
 ###################################################
-### chunk number 2: ch:MDS:data
+### code chunk number 2: ch:MDS:data
 ###################################################
 teensex <- matrix(c(21, 8, 2, 21, 9, 3, 14, 6, 4, 13, 8, 10, 8, 2, 10), nrow = 3)
 rownames(teensex) <- c("No boyfriend", "Boyfriend no sex", "Boyfriend sex")
@@ -37,7 +39,7 @@ names(teensex) <- c("Boyfriend", "Age", "Freq")
 
 
 ###################################################
-### chunk number 3: ch:MDS:X
+### code chunk number 3: ch:MDS:X
 ###################################################
 X <- matrix(c(
     3, 5, 6, 1, 4, 2, 0, 0, 7, 2,
@@ -49,51 +51,51 @@ X
 
 
 ###################################################
-### chunk number 4: ch:MDS:dist
+### code chunk number 4: ch:MDS:dist
 ###################################################
 (D <- dist(X))
 
 
 ###################################################
-### chunk number 5: ch:MDA:cmdscale
+### code chunk number 5: ch:MDA:cmdscale
 ###################################################
 cmdscale(D, k = 9, eig = TRUE)
 
 
 ###################################################
-### chunk number 6: ch:MDA:distcmd
+### code chunk number 6: ch:MDA:distcmd
 ###################################################
 max(abs(dist(X) - dist(cmdscale(D, k = 5))))
 
 
 ###################################################
-### chunk number 7: ch:MDA:cmdscalePCA
+### code chunk number 7: ch:MDA:cmdscalePCA
 ###################################################
 max(abs(prcomp(X)$x) - abs(cmdscale(D, k = 5)))
 
 
 ###################################################
-### chunk number 8: ch:MDA:man
+### code chunk number 8: ch:MDA:man
 ###################################################
 X_m <- cmdscale(dist(X, method = "manhattan"), 
                 k = nrow(X) - 1, eig = TRUE)
 
 
 ###################################################
-### chunk number 9: ch:MDA:man:eigen
+### code chunk number 9: ch:MDA:man:eigen
 ###################################################
 (X_eigen <- X_m$eig)
 
 
 ###################################################
-### chunk number 10: ch:MDA:man:eigen2
+### code chunk number 10: ch:MDA:man:eigen2
 ###################################################
 cumsum(abs(X_eigen)) / sum(abs(X_eigen))
 cumsum(X_eigen^2) / sum(X_eigen^2)
 
 
 ###################################################
-### chunk number 11: ch:MDS:airdist:tab
+### code chunk number 11: ch:MDS:airdist:tab
 ###################################################
 "airline.dist" <-
 structure(.Data = list(c(0, 587, 1212, 701, 1936, 604, 748, 2139, 218, 543)
@@ -127,33 +129,33 @@ airdist <- tmp
 
 
 ###################################################
-### chunk number 12: ch:MDS:airdist
+### code chunk number 12: ch:MDS:airdist
 ###################################################
 airline_mds <- cmdscale(airdist, k = 9, eig = TRUE)
 airline_mds$points
 
 
 ###################################################
-### chunk number 13: ch:MDS:airdistprint
+### code chunk number 13: ch:MDS:airdistprint
 ###################################################
 airline_mds$points[, -9]
 
 
 ###################################################
-### chunk number 14: ch:MDS:airdist:eigen
+### code chunk number 14: ch:MDS:airdist:eigen
 ###################################################
 (lam <- airline_mds$eig)
 
 
 ###################################################
-### chunk number 15: ch:MDS:airdist:crit
+### code chunk number 15: ch:MDS:airdist:crit
 ###################################################
 cumsum(abs(lam)) / sum(abs(lam))
 cumsum(lam^2) / sum(lam^2)
 
 
 ###################################################
-### chunk number 16: ch:MDS:airdist:plot
+### code chunk number 16: ch:MDS:airdist:plot
 ###################################################
 lim <- range(airline_mds$points[,1] * (-1)) * 1.2
 plot(airline_mds$points[,1] * (-1), airline_mds$points[,2],
@@ -164,7 +166,7 @@ text(airline_mds$points[,1] *(-1), airline_mds$points[,2],
 
 
 ###################################################
-### chunk number 17: ch:MDA:skulls:tab
+### code chunk number 17: ch:MDA:skulls:tab
 ###################################################
 data("skulls", package = "HSAUR2")
 toLatex(HSAURtable(skulls), pcol = 3,
@@ -173,7 +175,7 @@ toLatex(HSAURtable(skulls), pcol = 3,
 
 
 ###################################################
-### chunk number 18: ch:MDS:skulls:maha
+### code chunk number 18: ch:MDS:skulls:maha
 ###################################################
 skulls_var <- tapply(1:nrow(skulls), skulls$epoch, 
                      function(i) var(skulls[i,-1]))
@@ -193,7 +195,7 @@ skulls_mds <- cmdscale(skulls_mah)
 
 
 ###################################################
-### chunk number 19: ch:MDS:skulls:plot
+### code chunk number 19: ch:MDS:skulls:plot
 ###################################################
 lim <- range(skulls_mds) * 1.2
 plot(skulls_mds, xlab = "Coordinate 1", ylab = "Coordinate 2",
@@ -202,7 +204,7 @@ text(skulls_mds, labels = levels(skulls$epoch), cex = 0.7)
 
 
 ###################################################
-### chunk number 20: MDS-watervoles-tab
+### code chunk number 20: MDS-watervoles-tab
 ###################################################
 data("watervoles", package = "HSAUR2")
 tmp <- watervoles
@@ -218,7 +220,7 @@ watervoles <- tmp
 
 
 ###################################################
-### chunk number 21: MDS-voles-cmdscale
+### code chunk number 21: MDS-voles-cmdscale
 ###################################################
 data("watervoles", package = "HSAUR2")
 voles_mds <- cmdscale(watervoles, k = 13, eig = TRUE)
@@ -226,19 +228,19 @@ voles_mds$eig
 
 
 ###################################################
-### chunk number 22: MDS-voles-criterion1
+### code chunk number 22: MDS-voles-criterion1
 ###################################################
 cumsum(abs(voles_mds$eig))/sum(abs(voles_mds$eig))
 
 
 ###################################################
-### chunk number 23: MDS-voles-criterion2
+### code chunk number 23: MDS-voles-criterion2
 ###################################################
 cumsum((voles_mds$eig)^2)/sum((voles_mds$eig)^2)
 
 
 ###################################################
-### chunk number 24: MDS-watervoles-plot
+### code chunk number 24: MDS-watervoles-plot
 ###################################################
 x <- voles_mds$points[,1]
 y <- voles_mds$points[,2]
@@ -248,7 +250,7 @@ text(x, y, labels = colnames(watervoles), cex = 0.7)
 
 
 ###################################################
-### chunk number 25: MDS-watervoles-mst
+### code chunk number 25: MDS-watervoles-mst
 ###################################################
 library("ape")
 st <- mst(watervoles)
@@ -262,7 +264,7 @@ text(x, y, labels = colnames(watervoles), cex = 0.7)
 
 
 ###################################################
-### chunk number 26: MDS-voting
+### code chunk number 26: MDS-voting
 ###################################################
 library("MASS")
 data("voting", package = "HSAUR2")
@@ -270,7 +272,7 @@ voting_mds <- isoMDS(voting)
 
 
 ###################################################
-### chunk number 27: MDS-voting-tab
+### code chunk number 27: MDS-voting-tab
 ###################################################
 data("voting", package = "HSAUR2")
 tmp <- voting
@@ -288,7 +290,7 @@ voting <- tmp
 
 
 ###################################################
-### chunk number 28: MDS-voting-plot
+### code chunk number 28: MDS-voting-plot
 ###################################################
 x <- voting_mds$points[,1]
 y <- voting_mds$points[,2]
@@ -300,7 +302,7 @@ voting_sh <- Shepard(voting[lower.tri(voting)],
 
 
 ###################################################
-### chunk number 29: MDS-voting-Shepard
+### code chunk number 29: MDS-voting-Shepard
 ###################################################
 plot(voting_sh, pch = ".", xlab = "Dissimilarity",
      ylab = "Distance", xlim = range(voting_sh$x), 
@@ -309,7 +311,7 @@ lines(voting_sh$x, voting_sh$yf, type = "S")
 
 
 ###################################################
-### chunk number 30: ch:MDS:WWIIleaders:tab
+### code chunk number 30: ch:MDS:WWIIleaders:tab
 ###################################################
 WWIIleaders <- c(
 3,
@@ -343,13 +345,13 @@ WWIIleaders <- tmp
 
 
 ###################################################
-### chunk number 31: ch:MDA:WWIIleadersMDS
+### code chunk number 31: ch:MDA:WWIIleadersMDS
 ###################################################
 (WWII_mds <- isoMDS(WWIIleaders))
 
 
 ###################################################
-### chunk number 32: ch:MDS:WWIIleaders:plot
+### code chunk number 32: ch:MDS:WWIIleaders:plot
 ###################################################
 x <- WWII_mds$points[,1]
 y <- WWII_mds$points[,2]
@@ -360,7 +362,7 @@ text(x, y, labels = labels(WWIIleaders), cex = 0.7)
 
 
 ###################################################
-### chunk number 33: ch:MDS:teensex:tab
+### code chunk number 33: ch:MDS:teensex:tab
 ###################################################
 teensex <- xtabs(Freq ~ Boyfriend + Age, data = teensex)
 toLatex(HSAURtable(teensex), pcol = 1,
@@ -369,7 +371,7 @@ toLatex(HSAURtable(teensex), pcol = 1,
 
 
 ###################################################
-### chunk number 34: ch:MDS:teensex:CA
+### code chunk number 34: ch:MDS:teensex:CA
 ###################################################
 D <- function(x) {
     a <- t(t(x) / colSums(x))
@@ -383,7 +385,7 @@ D <- function(x) {
 
 
 ###################################################
-### chunk number 35: ch:MDS:teensex:plot
+### code chunk number 35: ch:MDS:teensex:plot
 ###################################################
 r1 <- cmdscale(dcols, eig = TRUE)
 c1 <- cmdscale(drows, eig = TRUE)
@@ -397,7 +399,7 @@ abline(v = 0, lty = 2)
 
 
 ###################################################
-### chunk number 36: MDS-gardenflowers-tab
+### code chunk number 36: MDS-gardenflowers-tab
 ###################################################
 data("gardenflowers", package = "HSAUR2")
 gfnames <- attr(gardenflowers, "Labels")

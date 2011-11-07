@@ -1,5 +1,7 @@
+### R code from vignette source 'Ch-LME.Rnw'
+
 ###################################################
-### chunk number 1: setup
+### code chunk number 1: setup
 ###################################################
 library("MVA")
 set.seed(280875)
@@ -26,13 +28,13 @@ if (file.exists("deparse.R")) {
 
 
 ###################################################
-### chunk number 2: setup
+### code chunk number 2: setup
 ###################################################
 library("nlme")
 
 
 ###################################################
-### chunk number 3: ch:LME:ex
+### code chunk number 3: ch:LME:ex
 ###################################################
 exd <- data.frame(ID = factor(1:6), Group = gl(2, 3), 
                   matrix(rpois(6 * 4, lambda = 10), nrow = 6))
@@ -41,20 +43,20 @@ ex_wide <- exd
 
 
 ###################################################
-### chunk number 4: ch:LME:wide
+### code chunk number 4: ch:LME:wide
 ###################################################
 ex_wide
 
 
 ###################################################
-### chunk number 5: ch:LME:wide
+### code chunk number 5: ch:LME:wide
 ###################################################
 reshape(ex_wide, direction = "long", idvar = "ID", 
         varying = colnames(ex_wide)[-(1:2)])
 
 
 ###################################################
-### chunk number 6: ch:LME:timber:tab
+### code chunk number 6: ch:LME:timber:tab
 ###################################################
 "timber" <-
 matrix(c(0., 0., 0., 0., 0., 0., 0., 0., 2.3799999999999999, 2.6899999999999999, 2.8500000000000001, 2.46,
@@ -97,7 +99,7 @@ toLatex(HSAURtable(timber), pcol = 2,
 
 
 ###################################################
-### chunk number 7: ch:LME:plasma:tab
+### code chunk number 7: ch:LME:plasma:tab
 ###################################################
 "plasma" <- 
 matrix(c(4.2999999999999998, 3.7000000000000002, 4., 3.6000000000000001, 4.0999999999999996, 3.7999999999999998,
@@ -169,28 +171,27 @@ toLatex(HSAURtable(plasma), pcol = 2,
 
 
 ###################################################
-### chunk number 8: ch:LME:timber:lm
+### code chunk number 8: ch:LME:timber:lm
 ###################################################
 summary(lm(loads ~ slippage, data = timber))
 
 
 ###################################################
-### chunk number 9: ch:LME:timber:plot eval=FALSE
+### code chunk number 9: ch:LME:timber:plot (eval = FALSE)
 ###################################################
-## #line 435 "Ch-LME.Rnw"
 ## xyplot(loads ~ slippage | specimen, data = timber,
 ##        layout = c(4, 2))
 
 
 ###################################################
-### chunk number 10: ch:LME:timber:plot
+### code chunk number 10: ch:LME:timber:plot
 ###################################################
 plot(xyplot(loads ~ slippage | specimen, data = timber,
             layout = c(4, 2)))
 
 
 ###################################################
-### chunk number 11: ch:LME:timber:lme
+### code chunk number 11: ch:LME:timber:lme
 ###################################################
 timber.lme <- lme(loads ~ slippage, 
                   random = ~1 | specimen,
@@ -201,34 +202,33 @@ timber.lme1 <- lme(loads ~ slippage,
 
 
 ###################################################
-### chunk number 12: ch:LME:timber:LRT
+### code chunk number 12: ch:LME:timber:LRT
 ###################################################
 library("RLRsim")
 exactRLRT(timber.lme)
 
 
 ###################################################
-### chunk number 13: ch:LME:timber:anova
+### code chunk number 13: ch:LME:timber:anova
 ###################################################
 anova(timber.lme, timber.lme1)
 
 
 ###################################################
-### chunk number 14: ch:LME:timber:lme:summary
+### code chunk number 14: ch:LME:timber:lme:summary
 ###################################################
 summary(timber.lme1)
 
 
 ###################################################
-### chunk number 15: ch:LME:timber:lme:predict
+### code chunk number 15: ch:LME:timber:lme:predict
 ###################################################
 timber$pred1 <- predict(timber.lme1)
 
 
 ###################################################
-### chunk number 16: ch:LME:timber:plotpredict eval=FALSE
+### code chunk number 16: ch:LME:timber:plotpredict (eval = FALSE)
 ###################################################
-## #line 512 "Ch-LME.Rnw"
 ## pfun <- function(x, y) {
 ##     panel.xyplot(x, y[1:length(x)])
 ##     panel.lines(x, y[1:length(x) + length(x)], lty = 1)
@@ -239,7 +239,7 @@ timber$pred1 <- predict(timber.lme1)
 
 
 ###################################################
-### chunk number 17: ch:LME:timber:plotpredict
+### code chunk number 17: ch:LME:timber:plotpredict
 ###################################################
 pfun <- function(x, y) {
     panel.xyplot(x, y[1:length(x)])
@@ -250,7 +250,7 @@ plot(xyplot(cbind(loads, pred1) ~ slippage | specimen, data = timber,
 
 
 ###################################################
-### chunk number 18: ch:LME:timber:quad
+### code chunk number 18: ch:LME:timber:quad
 ###################################################
 timber.lme2 <- lme(loads ~ slippage + I(slippage^2),
                    random = ~slippage | specimen,
@@ -259,7 +259,7 @@ anova(timber.lme1, timber.lme2)
 
 
 ###################################################
-### chunk number 19: ch:LME:timber:quad:plot
+### code chunk number 19: ch:LME:timber:quad:plot
 ###################################################
 timber$pred2 <- predict(timber.lme2)
 plot(xyplot(cbind(loads, pred2) ~ slippage | specimen, 
@@ -268,9 +268,8 @@ plot(xyplot(cbind(loads, pred2) ~ slippage | specimen,
 
 
 ###################################################
-### chunk number 20: ch:LME:plasma:plot eval=FALSE
+### code chunk number 20: ch:LME:plasma:plot (eval = FALSE)
 ###################################################
-## #line 599 "Ch-LME.Rnw"
 ## x <- reshape(plasma, direction = "wide", timevar = "time", 
 ##              idvar = "Subject", v.names = "plasma")
 ## parallel(~ x[,-(1:2)] | group, data = x, horizontal = FALSE,
@@ -280,7 +279,7 @@ plot(xyplot(cbind(loads, pred2) ~ slippage | specimen,
 
 
 ###################################################
-### chunk number 21: ch:LME:plasma:plot
+### code chunk number 21: ch:LME:plasma:plot
 ###################################################
 x <- reshape(plasma, direction = "wide", timevar = "time", 
              idvar = "Subject", v.names = "plasma")
@@ -291,14 +290,14 @@ plot(parallel(~ x[,-(1:2)] | group, data = x, horizontal = FALSE,
 
 
 ###################################################
-### chunk number 22: ch:LME:plasma:splom
+### code chunk number 22: ch:LME:plasma:splom
 ###################################################
 plot(splom(~ x[, grep("plasma", colnames(x))] | group, data = x, 
            cex = 1.5, pch = ".", pscales = NULL, varnames = 1:8))
 
 
 ###################################################
-### chunk number 23: ch:LME:plasma:lme
+### code chunk number 23: ch:LME:plasma:lme
 ###################################################
 plasma.lme1 <- lme(plasma ~ time + I(time^2) + group,
                    random = ~ time | Subject,   
@@ -307,13 +306,13 @@ summary(plasma.lme1)
 
 
 ###################################################
-### chunk number 24: ch:LME:plasma:lm
+### code chunk number 24: ch:LME:plasma:lm
 ###################################################
 summary(lm(plasma ~ time + I(time^2) + group, data = plasma))
 
 
 ###################################################
-### chunk number 25: ch:LME:plasma:predictplot1
+### code chunk number 25: ch:LME:plasma:predictplot1
 ###################################################
 plasma$pred1 <- predict(plasma.lme1)
 plot(xyplot(cbind(plasma, pred1) ~ time | Subject, data = plasma, groups = group, 
@@ -323,7 +322,7 @@ plot(xyplot(cbind(plasma, pred1) ~ time | Subject, data = plasma, groups = group
 
 
 ###################################################
-### chunk number 26: ch:LME:plasma:inter
+### code chunk number 26: ch:LME:plasma:inter
 ###################################################
 plasma.lme2 <- lme(plasma ~ time*group +I(time^2),
                    random = ~time | Subject, 
@@ -331,19 +330,19 @@ plasma.lme2 <- lme(plasma ~ time*group +I(time^2),
 
 
 ###################################################
-### chunk number 27: ch:LME:plasma:interaov
+### code chunk number 27: ch:LME:plasma:interaov
 ###################################################
 anova(plasma.lme1, plasma.lme2) 
 
 
 ###################################################
-### chunk number 28: ch:LME:plasma:summary
+### code chunk number 28: ch:LME:plasma:summary
 ###################################################
 summary(plasma.lme2)
 
 
 ###################################################
-### chunk number 29: ch:LME:plasma:predictplot2
+### code chunk number 29: ch:LME:plasma:predictplot2
 ###################################################
 plasma$pred2 <- predict(plasma.lme2)
 plot(xyplot(cbind(plasma, pred2) ~ time | Subject, data = plasma, groups = group,
@@ -353,14 +352,14 @@ plot(xyplot(cbind(plasma, pred2) ~ time | Subject, data = plasma, groups = group
 
 
 ###################################################
-### chunk number 30: ch:LME:plasma:random
+### code chunk number 30: ch:LME:plasma:random
 ###################################################
 res.int <- random.effects(plasma.lme2)[,1]
 res.slope <- random.effects(plasma.lme2)[,2]
 
 
 ###################################################
-### chunk number 31: ch:LME:plasma:fitplot
+### code chunk number 31: ch:LME:plasma:fitplot
 ###################################################
 qqnorm(res.int,ylab="Estimated random intercepts",main="Random intercepts")
 qqnorm(res.slope,ylab="Estimated random slopes",main="Random slopes")
@@ -369,7 +368,7 @@ qqnorm(resids,ylab="Estimated residuals",main="Residuals")
 
 
 ###################################################
-### chunk number 32: ch:LME:BtheB:tab
+### code chunk number 32: ch:LME:BtheB:tab
 ###################################################
 data("BtheB", package = "HSAUR2")
 toLatex(HSAURtable(BtheB), pcol = 1,
@@ -378,7 +377,7 @@ toLatex(HSAURtable(BtheB), pcol = 1,
 
 
 ###################################################
-### chunk number 33: ch:LME:BtheB:plot
+### code chunk number 33: ch:LME:BtheB:plot
 ###################################################
 ylim <- range(BtheB[,grep("bdi", names(BtheB))],
               na.rm = TRUE)
@@ -395,7 +394,7 @@ boxplot(btheb, main = "Beat the Blues", ylab = "BDI",
 
 
 ###################################################
-### chunk number 34: ch:LME:BtheB:long
+### code chunk number 34: ch:LME:BtheB:long
 ###################################################
 BtheB$subject <- factor(rownames(BtheB))
 nobs <- nrow(BtheB)
@@ -406,7 +405,7 @@ BtheB_long$time <- rep(c(2, 3, 5, 8), rep(nobs, 4))
 
 
 ###################################################
-### chunk number 35: ch:LME:BtheB:lme
+### code chunk number 35: ch:LME:BtheB:lme
 ###################################################
 BtheB_lme1 <- lme(bdi ~ bdi.pre + time + treatment + drug +
     length, random = ~ 1 | subject, data = BtheB_long, 
@@ -417,19 +416,19 @@ BtheB_lme2 <- lme(bdi ~ bdi.pre + time + treatment + drug +
 
 
 ###################################################
-### chunk number 36: ch:LME:BtheB:aov
+### code chunk number 36: ch:LME:BtheB:aov
 ###################################################
 anova(BtheB_lme1, BtheB_lme2)
 
 
 ###################################################
-### chunk number 37: ch:LME:BtheB:summary
+### code chunk number 37: ch:LME:BtheB:summary
 ###################################################
 summary(BtheB_lme1)
 
 
 ###################################################
-### chunk number 38: ch:LME:BtheB-missing
+### code chunk number 38: ch:LME:BtheB-missing
 ###################################################
 bdi <- BtheB[, grep("bdi", names(BtheB))]
 plot(1:4, rep(-0.5, 4), type = "n", axes = FALSE, 
