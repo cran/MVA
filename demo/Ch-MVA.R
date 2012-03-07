@@ -244,9 +244,9 @@ x <- USairpollution
 cm <- colMeans(x)
 S <- cov(x)
 d <- apply(x, 1, function(x) t(x - cm) %*% solve(S) %*% (x - cm))
-plot(qc <- qchisq((1:nrow(x) - 1/2) / nrow(x), df = 6), 
+plot(qc <- qchisq((1:nrow(x) - 1/2) / nrow(x), df = 7), 
      sd <- sort(d),
-     xlab = expression(paste(chi[6]^2, " Quantile")), 
+     xlab = expression(paste(chi[7]^2, " Quantile")), 
      ylab = "Ordered distances", xlim = range(qc) * c(1, 1.1))
 oups <- which(rank(abs(qc - sd), ties = "random") > nrow(x) - 3)
 text(qc[oups], sd[oups] - 1.5, names(oups))

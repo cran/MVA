@@ -1,4 +1,5 @@
 ### R code from vignette source 'Ch-MDS.Rnw'
+### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: setup
@@ -98,7 +99,7 @@ cumsum(X_eigen^2) / sum(X_eigen^2)
 ### code chunk number 11: ch:MDS:airdist:tab
 ###################################################
 "airline.dist" <-
-structure(.Data = list(c(0, 587, 1212, 701, 1936, 604, 748, 2139, 218, 543)
+structure(.Data = list(c(0, 587, 1212, 701, 1936, 604, 748, 2139, 2181, 543)
 , c(587, 0, 920, 940, 1745, 1188, 713, 1858, 1737, 597)
 , c(1212, 920, 0, 879, 831, 1726, 1631, 949, 1021, 1494)
 , c(701, 940, 879, 0, 1374, 968, 1420, 1645, 1891, 1220)
@@ -158,10 +159,10 @@ cumsum(lam^2) / sum(lam^2)
 ### code chunk number 16: ch:MDS:airdist:plot
 ###################################################
 lim <- range(airline_mds$points[,1] * (-1)) * 1.2
-plot(airline_mds$points[,1] * (-1), airline_mds$points[,2],
+plot(airline_mds$points[,1] * (-1), airline_mds$points[,2] * (-1),
      type = "n", xlab = "Coordinate 1", ylab = "Coordinate 2",
      xlim = lim, ylim = lim)
-text(airline_mds$points[,1] *(-1), airline_mds$points[,2], 
+text(airline_mds$points[,1] *(-1), airline_mds$points[,2] * (-1), 
      labels(airdist), cex = 0.7)
 
 

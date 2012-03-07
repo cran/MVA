@@ -158,7 +158,6 @@ with(USairpollution, cor(manu[-hull],popul[-hull]))
 ###################################################
 ### code chunk number 15: ch:Viz:USairpollution:chiplot
 ###################################################
-par(mai = par("mai") * c(1, 1, 1, 1.5))
 with(USairpollution, plot(manu, popul, 
                           xlab = mlab, ylab = plab, 
                           cex.lab = 0.9))
@@ -265,7 +264,6 @@ bumps <- sapply(x, function(a) gauss((xgrid - a)/h)/(n * h))
 ###################################################
 ### code chunk number 27: ch:Viz-x-bumps
 ###################################################
-op <- par(mai = par("mai") * c(1, 1.2, 1, 1))
 plot(xgrid, rowSums(bumps), ylab = expression(hat(f)(x)),
      type = "l", xlab = "x", lwd = 2)
 rug(x, lwd = 2)
