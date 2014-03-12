@@ -1,0 +1,292 @@
+%\VignetteIndexEntry{Errata}
+\documentclass{svmono}
+
+%% packages
+\usepackage{graphicx,multicol,makeidx}
+\usepackage{color,hyperref,thumbpdf}
+\usepackage{amstext, amssymb, amsmath}
+\usepackage{longtable}
+\usepackage[figuresright]{rotating}
+
+%% \usepackage{Sweave} gives
+\RequirePackage[T1]{fontenc}
+\RequirePackage{graphicx,ae,fancyvrb}
+\RequirePackage{upquote}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{fontshape=sl}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{fontshape=sl}
+\newenvironment{Schunk}{}{}
+
+%% Bibliography
+\usepackage[authoryear,round,longnamesfirst]{natbib}
+\bibpunct{(}{)}{,}{a}{}{,}
+\bibliographystyle{refstyle}
+
+%% Exercises
+\newcounter{exercise}[chapter]
+\setcounter{exercise}{0}
+\newcommand{\exercise}{\item{\stepcounter{exercise} Ex.
+                       \arabic{chapter}.\arabic{exercise} }}
+
+%% additional commands
+%% text
+%% \newcommand{\squote}[1]{`{#1}'} %%'
+\newcommand{\dquote}[1]{``{#1}''}
+\newcommand{\squote}[1]{``{#1}''}
+%% programming
+\makeatletter
+\newcommand\code{\bgroup\@makeother\_\@makeother\~\@makeother\$\@codex}
+\def\@codex#1{{\normalfont\ttfamily\hyphenchar\font=-1 #1}\egroup}
+\makeatother
+\let\proglang=\textsf
+\let\file=\texttt
+\newcommand{\dataset}[1]{{\texttt{#1}\index{#1 data@\Robject{#1} data}}}
+\newcommand{\startdata}[1]{\index{data sets!#1@\texttt{#1}|(}}
+\newcommand{\stopdata}[1]{\index{data sets!#1@\texttt{#1}|)}}
+\newcommand{\fct}[1]{{\texttt{#1()}\index{#1@\texttt{#1()}}}}
+\newcommand{\class}[1]{\dquote{\texttt{#1}}}
+%%\newcommand{\pkg}[1]{{{\fontseries{b}\selectfont #1}\index{#1@{\fontseries{b}\selectfont #1}|see{packages}}\index{packages!#1@{\fontseries{b}\selectfont #1}}}}
+\newcommand{\pkg}[1]{{{\fontseries{b}\selectfont #1}\index{#1@{\fontseries{b}\selectfont #1}}}}
+\newcommand{\email}[1]{\href{mailto:#1}{\normalfont\texttt{#1}}}
+\let\Robject=\texttt
+
+\let\Rpackage=\pkg
+\let\stressit=\textit
+\newcommand{\stressiti}[1]{\textit{#1}\index{#1}}
+\newcommand{\R}{\proglang{R}}
+\newcommand{\rR}{\proglang{R}}
+\let\Rcmd=\code
+\newcommand{\booktitle}[1]{\textit{#1}} %%'
+
+%% mathematics
+\renewcommand{\E}{\mathsf{E}}
+\newcommand{\Var}{\mathsf{Var}}
+\newcommand{\Cov}{\mathsf{Cov}}
+\newcommand{\Cor}{\mathsf{Cor}}
+\newcommand{\Prob}{\mathsf{P}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\renewcommand{\a}{\mathbf{a}}
+\newcommand{\barx}{\bar{\x}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Sig}{\mathbf{\Sigma}}
+\renewcommand{\S}{\mathbf{S}}
+\newcommand{\pvalue}{$p$-value}
+\newcommand{\pvalues}{$p$-values}
+\newcommand{\ttest}{$t$-test}
+\newcommand{\bgamma}{\boldsymbol{\gamma}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\bmu}{\boldsymbol{\mu}}
+\newcommand{\bvarphi}{\boldsymbol{\varphi}}
+
+%% for internal use
+\newcommand{\fixme}[1]{\emph{\marginpar{FIXME} (#1)}}
+\newcommand{\readme}[1]{\emph{\marginpar{README} (#1)}}
+\newcommand{\argh}[1]{\emph{\marginpar{ARGH} (#1)}}
+%%\usepackage{ulem}
+
+%%figures
+\let\oldincludegraphics\includegraphics
+\renewcommand\includegraphics[2][H]{%
+  \oldincludegraphics[trim=0mm 5mm 0mm 7mm]{#2}%
+  %% \graphicsalignment
+}
+
+%% subsection formatting
+\makeatletter
+\renewcommand{\subsection}{\@startsection
+  {subsection}%
+  {2}%
+  {0mm}%
+  {-\baselineskip}%
+  {0.5\baselineskip\noindent}%
+  {\normalfont\large\sf}}%
+\makeatother
+
+%% paragraph formatting (remove for Springer)
+%%\setlength{\parskip}{0.5ex plus0.1ex minus0.1ex}
+%%\setlength{\parindent}{0em}
+
+%% misc formatting
+\renewcommand{\labelenumii}{(\theenumii)}
+
+%% hypersetup
+\definecolor{Red}{rgb}{0.5,0,0} %%{0.7,0,0}
+\definecolor{Blue}{rgb}{0,0,0.5} %%{0,0,0.8}
+\hypersetup{%
+  hyperindex = {true},
+  colorlinks = {false}, %% -> false for Springer
+  linktocpage = {true},
+  plainpages = {false},
+  linkcolor = {Blue},
+  citecolor = {Blue},
+  urlcolor = {Red},
+  pdfstartview = {Fit},
+  pdfpagemode = {UseOutlines},
+  pdfview = {XYZ null null null},
+  pdfauthor = {Brian S. Everitt and Torsten Hothorn},
+  pdftitle = {An Introduction to Applied Multivariate Analysis with R},
+  pdfkeywords = {statistical software, R}
+}
+
+%% title page
+\title{An Introduction to Applied Multivariate Analysis with \proglang{R}}
+\author{Brian S. Everitt and Torsten Hothorn}
+\date{}
+\begin{document}
+\maketitle
+
+<<setup, echo=FALSE, results=hide>>=
+library("MVA")
+set.seed(280875)
+library("lattice")
+lattice.options(default.theme =
+    function()
+        standard.theme("pdf", color = FALSE))
+
+if (file.exists("deparse.R")) {
+    if (!file.exists("figs")) dir.create("figs")
+    source("deparse.R")
+    options(prompt = "R> ", continue = "+  ", width = 64,
+        digits = 4, show.signif.stars = FALSE, useFancyQuotes = FALSE)
+
+    options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
+                           twofig =   function() {par(mfrow = c(1,2))},                           
+                           figtwo =   function() {par(mfrow = c(2,1))},                           
+                           threefig = function() {par(mfrow = c(1,3))},
+                           figthree = function() {par(mfrow = c(3,1))},
+                           fourfig =  function() {par(mfrow = c(2,2))},
+                           sixfig =   function() {par(mfrow = c(3,2))},
+                           nomar = function() par("mai" = c(0, 0, 0, 0))))
+}
+@
+
+\SweaveOpts{engine = R, strip.white = TRUE, keep.source = TRUE, width = 4.75, height = 4.75, eps = FALSE, prefix.string = figs/MVA}
+%% for some reason strip.white needs to be set explicitly
+\SweaveOpts{engine = R, strip.white = TRUE, keep.source = TRUE}
+
+
+%% for some reason strip.white needs to be set explicitly
+\chapter{Errata} \label{ch:Errata}
+
+Errata for \cite{Everitt_Hothorn_2011}.
+
+\section{List of Typos} \label{ch:Viz:typos}
+
+\begin{itemize}
+
+\item Table 4.1: distance SEA ATL is 2181, not 218 (corrected in data set)
+
+\item page 139:
+
+\begin{displaymath}
+\mathbf{y}=\mathbf{C}\boldsymbol{\Psi}_{x} \mathbf{f}+\mathbf{Cu}
+\end{displaymath}
+needs to read
+\begin{displaymath}
+\mathbf{y}=\mathbf{C}\boldsymbol{\Lambda}_{x} \mathbf{f}+\mathbf{Cu}
+\end{displaymath}
+and
+
+\begin{displaymath}
+\Var{(\mathbf{y})}= \mathbf{C}\Sig\mathbf{C}=
+\mathbf{C}\boldsymbol{\Lambda}_{x}\mathbf{C}+
+\mathbf{C}\boldsymbol{\Psi}_{x}\mathbf{C}.
+\end{displaymath}
+
+needs to read
+\begin{displaymath}
+\Var{(\mathbf{y})}= \mathbf{C}\Sig\mathbf{C}=
+\mathbf{C}\boldsymbol{\Lambda}_{x}\boldsymbol{\Lambda}^\top_{x}\mathbf{C}+
+\mathbf{C}\boldsymbol{\Psi}_{x}\mathbf{C}.
+\end{displaymath}
+(spotted by Kwok P Chun)
+
+\item page 68:
+\begin{displaymath}
+\mathbf{R}=
+\left(
+\begin{array}{ccc}
+1.0&r\\%
+r&0.1
+\end{array}
+\right)
+\end{displaymath}
+needs to read
+\begin{displaymath}
+\mathbf{R}=
+\left(
+\begin{array}{ccc}
+1.0&r\\%
+r&1.0   
+\end{array}
+\right)
+\end{displaymath}
+(spotted by Andreas Artemiou)
+
+\item page 137
+
+\begin{displaymath}
+\boldsymbol{\Lambda}=
+\left(
+\begin{array}{ccc}
+\lambda_{11}&\dots&\lambda_{1k}\\%
+\vdots&&\vdots\\%
+\lambda_{q1}&\dots&\lambda_{qk}\\%
+\end{array}
+\right),
+\;\;
+\mathbf{f}=
+\left(
+\begin{array}{c}
+f_{1}\\%
+\vdots\\%   
+f_{q}\\%
+\end{array}
+\right),
+\;\;
+\mathbf{u}=
+\left(
+\begin{array}{c}
+u_{1}\\%
+\vdots\\%
+u_{q}\\%
+\end{array}
+\right.
+\end{displaymath}           
+needs to read
+\begin{displaymath}
+\boldsymbol{\Lambda}=
+\left(
+\begin{array}{ccc}
+\lambda_{11}&\dots&\lambda_{1k}\\%
+\vdots&&\vdots\\%
+\lambda_{q1}&\dots&\lambda_{qk}\\%
+\end{array}
+\right),
+\;\;
+\mathbf{f}=
+\left(
+\begin{array}{c}
+f_{1}\\%
+\vdots\\%   
+f_{k}\\%
+\end{array}
+\right),
+\;\;
+\mathbf{u}=
+\left(
+\begin{array}{c}
+u_{1}\\%
+\vdots\\%
+u_{q}\\%
+\end{array}
+\right)
+\end{displaymath}           
+(spotted by Andreas Artemiou)
+
+\end{itemize}
+
+
+\bibliography{MVA}
+\end{document}

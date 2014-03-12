@@ -314,6 +314,10 @@ summary(lm(plasma ~ time + I(time^2) + group, data = plasma))
 ###################################################
 ### code chunk number 25: ch:LME:plasma:predictplot1
 ###################################################
+pfun <- function(x, y, subscripts, groups) {  
+    panel.xyplot(x, y[1:length(x)], pch = c(1:2)[groups[subscripts]])
+    panel.lines(x, y[1:length(x) + length(x)], lty = 1)
+}
 plasma$pred1 <- predict(plasma.lme1)
 plot(xyplot(cbind(plasma, pred1) ~ time | Subject, data = plasma, groups = group, 
        type = "b",
