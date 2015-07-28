@@ -1,3 +1,7 @@
 
 import(HSAUR2)
 export(stalac,chiplot,bvbox)
+
+importFrom("graphics", "abline", "axis", "lines", "par", "plot",
+     "points", "segments", "text")
+importFrom("stats", "cor", "median", "qchisq", "var")
