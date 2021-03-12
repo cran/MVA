@@ -1,5 +1,4 @@
 ### R code from vignette source 'Ch-Errata.Rnw'
-### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: setup

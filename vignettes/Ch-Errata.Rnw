@@ -285,6 +285,12 @@ u_{q}\\%
 \end{displaymath}           
 (spotted by Andreas Artemiou)
 
+\item page 175
+
+$\frac{1}{n_{i}}$ reads correct $\frac{1}{n_{l}}$ (spotted by Philip Fowler)
+
+
+
 \end{itemize}
 
 

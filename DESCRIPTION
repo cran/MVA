@@ -1,7 +1,7 @@
 Package: MVA
 Title: An Introduction to Applied Multivariate Analysis with R
-Date: 2015-07-28
-Version: 1.0-6
+Date: 2021-03-12
+Version: 1.0-7
 Author: Brian S. Everitt and Torsten Hothorn
 Maintainer: Torsten Hothorn <Torsten.Hothorn@R-project.org>
 Description: Functions, data sets, analyses and examples from the book 
@@ -14,6 +14,6 @@ URL: http://dx.doi.org/10.1007/978-1-4419-9650-3
 License: GPL-2
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2015-07-28 14:07:54 UTC; hothorn
+Packaged: 2021-03-12 14:11:42 UTC; hothorn
 Repository: CRAN
-Date/Publication: 2015-07-28 23:03:32
+Date/Publication: 2021-03-12 14:40:02 UTC
