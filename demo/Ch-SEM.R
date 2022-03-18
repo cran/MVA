@@ -124,21 +124,19 @@ mod <- c("Ability     -> SCA, lambda1, NA",
          "CP         <-> CP, theta6, NA",
          "Ability    <-> Ability, NA, 1",
          "Aspiration <-> Aspiration, NA, 1")
-writeLines(mod, con = "ability_model.txt")
 
 
 ###################################################
 ### code chunk number 5: ch:SEM:ability-sem
 ###################################################
-ability_model <- specify.model(file = "ability_model.txt")
+ability_model <- specifyModel(text = mod)
 ability_sem <- sem(ability_model, ability, 556)
 
 
 ###################################################
 ### code chunk number 6: ch:SEM:ability-sem
 ###################################################
-writeLines(readLines("ability_model.txt"))
-r <- file.remove("ability_model.txt")
+mod
 
 
 ###################################################
@@ -156,16 +154,14 @@ su <- summary(ability_sem)
 ###################################################
 ### code chunk number 9: ch:SEM:ability-path
 ###################################################
-path.diagram(ability_sem, file = "ability_sem", 
-             ignore.double = FALSE, edge.labels = "both")
+pathDiagram(ability_sem, file = "ability_sem", 
+             ignore.double = FALSE, edge.labels = "both", output.type = "graphics")
 
 
 ###################################################
 ### code chunk number 10: ch:SEM:ability-files
 ###################################################
 file.remove("ability_sem.dot")
-file.copy("ability_sem.pdf", "figs", overwrite = TRUE)
-file.remove("ability_sem.pdf")
 
 
 ###################################################
@@ -207,7 +203,6 @@ mod <- c("Alcohol   -> Cigs, lambda1, NA",
          "Alcohol  <-> Cannabis, rho1, NA",
          "Alcohol  <-> Hard, rho2, NA",
          "Cannabis <-> Hard, rho3, NA")
-writeLines(mod, con = "druguse_model.txt")
 
 
 ###################################################
@@ -221,30 +216,27 @@ rownames(druguse) <- colnames(druguse) <- c("Cigs",
 ###################################################
 ### code chunk number 13: ch:SEM:druguse-sem
 ###################################################
-druguse_model <- specify.model(file = "druguse_model.txt")
+druguse_model <- specifyModel(text = mod)
 druguse_sem <- sem(druguse_model, druguse, 1634)
 
 
 ###################################################
 ### code chunk number 14: ch:SEM:druguse-sem
 ###################################################
-writeLines(readLines("druguse_model.txt"))
-r <- file.remove("druguse_model.txt")
+mod
 
 
 ###################################################
 ### code chunk number 15: ch:SEM:druguse-path
 ###################################################
-path.diagram(druguse_sem, file = "druguse_sem", 
-             ignore.double = FALSE, edge.labels = "both") 
+pathDiagram(druguse_sem, file = "druguse_sem", 
+            ignore.double = FALSE, edge.labels = "both", output.type = "graphics") 
 
 
 ###################################################
 ### code chunk number 16: ch:SEM:druguse-files
 ###################################################
 file.remove("druguse_sem.dot")
-file.copy("druguse_sem.pdf", "figs", overwrite = TRUE)
-file.remove("druguse_sem.pdf")
 
 
 ###################################################
@@ -316,39 +308,33 @@ mod <- c("SES           -> Educ, NA, 1",
     "Powles71     <-> Powles71, theta6, NA",
     "Alienation67 <-> Alienation67, delta1, NA",
     "Alienation71 <-> Alienation71, delta2, NA")
-writeLines(mod, con = "alienation_model.txt")
 mod2 <- c(mod, "Anomia67 <-> Anomia71,psi,NA")
-writeLines(mod2, con = "alienation_model2.txt")
 
 
 ###################################################
 ### code chunk number 22: ch:SEM:alienation-sem
 ###################################################
-alienation_model <- specify.model(
-    file = "alienation_model.txt")
+alienation_model <- specifyModel(text = mod)
 alienation_sem <- sem(alienation_model, alienation, 932)
 
 
 ###################################################
 ### code chunk number 23: ch:SEM:alienation-sem
 ###################################################
-writeLines(readLines("alienation_model.txt"))
-r <- file.remove("alienation_model.txt")
+mod
 
 
 ###################################################
 ### code chunk number 24: ch:SEM:alienation-path
 ###################################################
-path.diagram(alienation_sem, file = "alienation_sem", 
-             ignore.double = FALSE, edge.labels = "both")
+pathDiagram(alienation_sem, file = "alienation_sem", 
+            ignore.double = FALSE, edge.labels = "both", output.type = "graphics")
 
 
 ###################################################
 ### code chunk number 25: ch:SEM:alienation-files
 ###################################################
 file.remove("alienation_sem.dot")
-file.copy("alienation_sem.pdf", "figs", overwrite = TRUE)
-file.remove("alienation_sem.pdf")
 
 
 ###################################################
@@ -366,9 +352,8 @@ su <- summary(alienation_sem)
 ###################################################
 ### code chunk number 28: ch:SEM:alienation-sem2
 ###################################################
-alienation_model2 <- specify.model(file = "alienation_model2.txt")
+alienation_model2 <- specifyModel(text = mod)
 alienation_sem2 <- sem(alienation_model2, alienation, 932)
 su <- summary(alienation_sem2)
-r <- file.remove("alienation_model2.txt")
 
 

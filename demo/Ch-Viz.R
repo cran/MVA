@@ -268,7 +268,6 @@ plot(xgrid, rowSums(bumps), ylab = expression(hat(f)(x)),
      type = "l", xlab = "x", lwd = 2)
 rug(x, lwd = 2)
 out <- apply(bumps, 2, function(b) lines(xgrid, b))
-par(op)
 
 
 ###################################################

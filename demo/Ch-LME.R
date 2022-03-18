@@ -272,7 +272,8 @@ plot(xyplot(cbind(loads, pred2) ~ slippage | specimen,
 ###################################################
 ## x <- reshape(plasma, direction = "wide", timevar = "time", 
 ##              idvar = "Subject", v.names = "plasma")
-## parallel(~ x[,-(1:2)] | group, data = x, horizontal = FALSE,
+## X <- as.matrix(x[,-(1:2)])
+## parallelplot(~ X | group, data = x, horizontal = FALSE,
 ##          col = "black", scales = list(x = list(labels = 1:8)),
 ##          ylab = "Plasma inorganic phosphate",
 ##          xlab = "Time (hours after oral glucose challenge)")
@@ -283,7 +284,8 @@ plot(xyplot(cbind(loads, pred2) ~ slippage | specimen,
 ###################################################
 x <- reshape(plasma, direction = "wide", timevar = "time", 
              idvar = "Subject", v.names = "plasma")
-plot(parallel(~ x[,-(1:2)] | group, data = x, horizontal = FALSE,
+X <- as.matrix(x[,-(1:2)])
+plot(parallelplot(~ X | group, data = x, horizontal = FALSE,
          col = "black", scales = list(x = list(labels = 1:8)),
          ylab = "Plasma inorganic phosphate",
          xlab = "Time (hours after oral glucose challenge)"))

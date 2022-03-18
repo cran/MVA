@@ -1,5 +1,4 @@
 ### R code from vignette source 'Ch-MDS.Rnw'
-### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: setup
@@ -60,7 +59,7 @@ X
 ###################################################
 ### code chunk number 5: ch:MDA:cmdscale
 ###################################################
-cmdscale(D, k = 9, eig = TRUE)
+cmdscale(D, k = 7, eig = TRUE)
 
 
 ###################################################
@@ -79,7 +78,7 @@ max(abs(prcomp(X)$x) - abs(cmdscale(D, k = 5)))
 ### code chunk number 8: ch:MDA:man
 ###################################################
 X_m <- cmdscale(dist(X, method = "manhattan"), 
-                k = nrow(X) - 1, eig = TRUE)
+                k = 6, eig = TRUE)
 
 
 ###################################################
@@ -132,7 +131,7 @@ airdist <- tmp
 ###################################################
 ### code chunk number 12: ch:MDS:airdist
 ###################################################
-airline_mds <- cmdscale(airdist, k = 9, eig = TRUE)
+airline_mds <- cmdscale(airdist, k = 6, eig = TRUE)
 airline_mds$points
 
 
@@ -190,8 +189,7 @@ skulls_cen <- matrix(unlist(skulls_cen),
 skulls_mah <- apply(skulls_cen, 1, 
     function(cen) mahalanobis(skulls_cen, cen, S))
 skulls_mah
-cmdscale(skulls_mah, k = nrow(skulls_mah) - 1, 
-         eig = TRUE)$eig
+cmdscale(skulls_mah, k = 2, eig = TRUE)$eig
 skulls_mds <- cmdscale(skulls_mah)
 
 
@@ -224,7 +222,7 @@ watervoles <- tmp
 ### code chunk number 21: MDS-voles-cmdscale
 ###################################################
 data("watervoles", package = "HSAUR2")
-voles_mds <- cmdscale(watervoles, k = 13, eig = TRUE)
+voles_mds <- cmdscale(watervoles, k = 7, eig = TRUE)
 voles_mds$eig
 
 
